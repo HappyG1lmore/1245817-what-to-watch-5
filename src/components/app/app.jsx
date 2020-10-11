@@ -1,12 +1,11 @@
 import React from "react";
 import Main from "./../main/main";
 import PropTypes from "prop-types";
-import SignIn from "./../sign_in/sign_in";
-import MyList from "./../my_list/my_list";
+import SignIn from "./../sign-in/sign-in";
+import MyList from "./../my-list/my-list";
 import Film from "./../film/film";
-import AddReview from "./../add_review/add_review";
+import AddReview from "./../add-review/add-review";
 import Player from "./../player/player";
-
 
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 
