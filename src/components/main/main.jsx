@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Main = (props) => {
-  const {title, genre, year} = props.movie;
-
+  const {title, genre, year} = props.mainFilm;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -485,8 +484,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  movie:
-  PropTypes.shape({
+  mainFilm: PropTypes.shape({
     title: PropTypes.string,
     genre: PropTypes.string,
     year: PropTypes.string
