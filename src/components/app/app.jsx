@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {filmsListPropTypes} from "../../common-prop-types";
-
+import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "./../main/main";
 import SignIn from "./../sign-in/sign-in";
 import MyList from "./../my-list/my-list";
@@ -9,14 +9,15 @@ import Film from "./../film/film";
 import AddReview from "./../add-review/add-review";
 import Player from "./../player/player";
 
-import {Switch, Route, BrowserRouter} from "react-router-dom";
-
 const App = (props) => {
   const {mainFilm, filmsList} = props;
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/"
+        <Route
+          exact
+          path="/"
           render = { () => (
             <Main mainFilm={mainFilm} filmsList={filmsList}/>
           )}
@@ -24,12 +25,16 @@ const App = (props) => {
         <Route exact path="/login">
           <SignIn />
         </Route>
-        <Route exact path="/mylist"
+        <Route
+          exact
+          path="/mylist"
           render = { () => (
             <MyList filmsList={filmsList}/>
           )}
         />
-        <Route exact path="/films/:id?"
+        <Route
+          exact
+          path="/films/:id?"
           render = { (routerProps) => (
             <Film routerProps={routerProps} filmsList={filmsList}/>
           )}

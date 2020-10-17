@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import {filmsListPropTypes} from "../../common-prop-types";
 
-import FilmsList from "../../components/films-list/films-list";
+import FilmsList from "../films-list/films-list";
 
 const Main = (props) => {
-  const {filmsList,
+  const {
+    filmsList,
     mainFilm: {title, genre, year}
   } = props;
   return (

@@ -4,17 +4,16 @@ import {filmPropTypes} from "../../common-prop-types";
 import {Link} from "react-router-dom";
 
 const SmallMovieCard = (props) => {
+  const {onCardMouseEnter, onCardMouseLeave, film} = props;
+
   const handleMouseEnter = () => {
-    const {onCardMouseEnter, film} = props;
     onCardMouseEnter(film.id);
   };
 
   const handleMouseLeave = () => {
-    const {onCardMouseLeave} = props;
     onCardMouseLeave();
   };
 
-  const {film} = props;
   return (
     <article className="small-movie-card catalog__movies-card"
       onMouseEnter={handleMouseEnter}

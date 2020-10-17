@@ -1,11 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
-
+import {routerPropTypes} from "../../common-prop-types";
 import ReviewForm from "../../components/review-form/review-form";
 
 const AddReview = (props) => {
-  const {params: {id}} = props.match;
+  const {params} = props.match;
+
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
@@ -27,7 +27,7 @@ const AddReview = (props) => {
           <nav className={`breadcrumbs`}>
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${id}`} className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+                <Link to={`/films/${params.id}`} className="breadcrumbs__link">The Grand Budapest Hotel</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -54,8 +54,6 @@ const AddReview = (props) => {
   );
 };
 
-AddReview.propTypes = {
-  match: PropTypes.object
-};
+AddReview.propTypes = routerPropTypes;
 
 export default AddReview;

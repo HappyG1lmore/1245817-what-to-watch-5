@@ -79,39 +79,27 @@ const FRAMES = [
   `img/moonrise-kingdom.jpg`,
 ];
 
-/*
 // eslint-disable-next-line consistent-return
 const createRatingText = (rating) => {
-  debugger
+  let ratingText = null;
   switch (rating) {
     case (rating <= 3):
-      return (`Bad`);
+      ratingText = `Bad`;
+      break;
     case (rating > 3 && rating <= 5):
-      return (`Normal`);
+      ratingText = `Normal`;
+      break;
     case (rating > 5 && rating <= 8):
-      return (`Good`);
+      ratingText = `Good`;
+      break;
     case (rating > 8 && rating < 10):
-      return (`Very good`);
+      ratingText = `Very good`;
+      break;
     case (rating === 10):
-      return (`Awesome`);
-    default:
+      ratingText = `Awesome`;
+      break;
   }
-};
-*/
-
-// eslint-disable-next-line consistent-return
-const createRatingText = (rating) => {
-  if (rating <= 3) {
-    return (`Bad`);
-  } else if (rating > 3 && rating <= 5) {
-    return (`Normal`);
-  } else if (rating > 5 && rating <= 8) {
-    return (`Good`);
-  } else if (rating > 8 && rating < 10) {
-    return (`Very good`);
-  } else if (rating === 10) {
-    return (`Awesome`);
-  }
+  return ratingText;
 };
 
 const createDescription = function () {
@@ -149,7 +137,7 @@ export const generateFilm = (idFilm) => {
     genre: getRandomLengthArray(GENRES, MAX_GENRES),
     year: String(getRandomIntFromRange(MIN_YEAR, MAX_YEAR)),
     rating,
-    ratingText: createRatingText(rating),
+    ratingText: createRatingText(Number(rating)),
     ratings: String(getRandomIntFromRange(MIN_RATINGS, MAX_RATINGS)),
     description: createDescription(),
     director: getRandomArrayItem(NAMES),

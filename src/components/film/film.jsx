@@ -1,10 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {filmsListPropTypes} from "../../common-prop-types";
+import {filmsListPropTypes, routerPropTypes} from "../../common-prop-types";
 import PropTypes from "prop-types";
 
 const Film = (props) => {
-
   const {
     filmsList,
     routerProps: {history, match}
@@ -129,8 +128,9 @@ const Film = (props) => {
                     alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
                 </div>
                 <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href={`movie-page.html`}>Fantastic Beasts: The Crimes of
-                    Grindelwald</a>
+                  <a className="small-movie-card__link" href={`movie-page.html`}>
+                    Fantastic Beasts: The Crimes of Grindelwald
+                  </a>
                 </h3>
               </article>
 
@@ -185,7 +185,7 @@ const Film = (props) => {
 
 Film.propTypes = {
   filmsList: filmsListPropTypes,
-  routerProps: PropTypes.object
+  routerProps: PropTypes.shape(routerPropTypes)
 };
 
 export default Film;

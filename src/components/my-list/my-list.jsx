@@ -1,8 +1,6 @@
 import React, {PureComponent} from "react";
 import {filmsListPropTypes} from "../../common-prop-types";
-
-import SmallMovieCard from "./../small-movie-card/small-movie-card";
-
+import SmallMovieCard from "../small-movie-card/small-movie-card";
 
 class MyList extends PureComponent {
   constructor(props) {
@@ -25,6 +23,7 @@ class MyList extends PureComponent {
 
   render() {
     const {filmsList} = this.props;
+
     return (
       <div className="user-page">
         <header className="page-header user-page__head">
