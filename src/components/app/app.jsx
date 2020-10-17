@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {propTypesFilmsList} from "../../prop-types";
+import {filmsListPropTypes} from "../../common-prop-types";
+
 import Main from "./../main/main";
 import SignIn from "./../sign-in/sign-in";
 import MyList from "./../my-list/my-list";
@@ -29,8 +30,8 @@ const App = (props) => {
           )}
         />
         <Route exact path="/films/:id?"
-          render = { (routProps) => (
-            <Film routProps={routProps} filmsList={filmsList}/>
+          render = { (routerProps) => (
+            <Film routerProps={routerProps} filmsList={filmsList}/>
           )}
         />
         <Route exact path="/player/:id?">
@@ -48,7 +49,7 @@ App.propTypes = {
     genre: PropTypes.string,
     year: PropTypes.string
   }),
-  filmsList: propTypesFilmsList
+  filmsList: filmsListPropTypes
 };
 
 export default App;

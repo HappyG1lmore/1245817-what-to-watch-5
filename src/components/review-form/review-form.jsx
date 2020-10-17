@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 
-class CommentField extends PureComponent {
+class ReviewForm extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,6 +10,7 @@ class CommentField extends PureComponent {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
   }
+
   handleFieldChange(evt) {
     const {name, value} = evt.target;
     this.setState({[name]: value});
@@ -22,7 +23,7 @@ class CommentField extends PureComponent {
   render() {
     return (
       <div className="add-review">
-        <form action="#" className="add-review__form"
+        <form className="add-review__form"
           onSubmit={this.handleSubmit}>
           <div className="rating">
             <div className="rating__stars">
@@ -57,4 +58,4 @@ class CommentField extends PureComponent {
   }
 }
 
-export default CommentField;
+export default ReviewForm;

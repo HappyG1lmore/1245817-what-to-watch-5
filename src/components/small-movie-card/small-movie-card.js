@@ -1,50 +1,41 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import {propTypesFilm} from "../../prop-types";
+import {filmPropTypes} from "../../common-prop-types";
 import {Link} from "react-router-dom";
 
-class SmallMovieCard extends PureComponent {
-  constructor(props) {
-    super(props);
-    const {film, onCardMouseEnter, onCardMouseLeave} = props;
-    this.film = film;
-    this.onCardMouseEnter = onCardMouseEnter;
-    this.onCardMouseLeave = onCardMouseLeave;
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-  }
+const SmallMovieCard = (props) => {
+  const handleMouseEnter = () => {
+    const {onCardMouseEnter, film} = props;
+    onCardMouseEnter(film.id);
+  };
 
-  handleMouseEnter() {
-    this.onCardMouseEnter(this.film.id);
-  }
+  const handleMouseLeave = () => {
+    const {onCardMouseLeave} = props;
+    onCardMouseLeave();
+  };
 
-  handleMouseLeave() {
-    this.onCardMouseLeave();
-  }
-
-  render() {
-    return (
-      <article className="small-movie-card catalog__movies-card"
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}>
-        <Link to={`/films/${this.film.id}`}>
-          <div className="small-movie-card__image" >
-            <img src={this.film.frame}
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              width="280" height="175"
-            />
-          </div>
-        </Link>
-        <h3 className="small-movie-card__title">
-          <Link to={`/films/${this.film.id}`} className="small-movie-card__link" href="movie-page.html">{this.film.title} </Link>
-        </h3>
-      </article>
-    );
-  }
-}
+  const {film} = props;
+  return (
+    <article className="small-movie-card catalog__movies-card"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
+      <Link to={`/films/${film.id}`}>
+        <div className="small-movie-card__image">
+          <img src={film.frame}
+            alt="Fantastic Beasts: The Crimes of Grindelwald"
+            width="280" height="175"
+          />
+        </div>
+      </Link>
+      <h3 className="small-movie-card__title">
+        <Link to={`/films/${film.id}`} className="small-movie-card__link" href="movie-page.html">{film.title} </Link>
+      </h3>
+    </article>
+  );
+};
 
 SmallMovieCard.propTypes = {
-  film: propTypesFilm,
+  film: filmPropTypes,
   onCardMouseEnter: PropTypes.func,
   onCardMouseLeave: PropTypes.func
 };

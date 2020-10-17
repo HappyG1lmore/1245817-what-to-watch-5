@@ -1,5 +1,4 @@
 import {getRandomIntFromRange, getRandomArrayItem, getRandomLengthArray, getRandomTime, getRandomDate} from "../utils.js";
-import {nanoid} from 'nanoid';
 
 const MAX_PHRASE = 15;
 const MAX_NAMES = 5;
@@ -66,14 +65,6 @@ const GENRES = [
   `Mystery`
 ];
 
-const RATING_TEXT = [
-  `Bad`,
-  `Horror`,
-  `Good`,
-  `Very good`,
-  `Awesome`,
-];
-
 const FRAMES = [
   `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   `img/bohemian-rhapsody.jpg`,
@@ -88,9 +79,10 @@ const FRAMES = [
   `img/moonrise-kingdom.jpg`,
 ];
 
-
+/*
 // eslint-disable-next-line consistent-return
-/* const createRatingText = function (rating) {
+const createRatingText = (rating) => {
+  debugger
   switch (rating) {
     case (rating <= 3):
       return (`Bad`);
@@ -102,13 +94,27 @@ const FRAMES = [
       return (`Very good`);
     case (rating === 10):
       return (`Awesome`);
+    default:
   }
 };
- не очень придумал как в во время генерации рейтинга, его применять в этом же объекте. Пока сделаю просто рандом, потом подскажешь, переделаю
-  */
+*/
 
+// eslint-disable-next-line consistent-return
+const createRatingText = (rating) => {
+  if (rating <= 3) {
+    return (`Bad`);
+  } else if (rating > 3 && rating <= 5) {
+    return (`Normal`);
+  } else if (rating > 5 && rating <= 8) {
+    return (`Good`);
+  } else if (rating > 8 && rating < 10) {
+    return (`Very good`);
+  } else if (rating === 10) {
+    return (`Awesome`);
+  }
+};
 
-const createDiscription = function () {
+const createDescription = function () {
   const phrases = getRandomLengthArray(PHRASE, MAX_PHRASE);
   return phrases.join(` `);
 };
@@ -127,11 +133,12 @@ const createReviews = function (amount) {
   return reviews;
 };
 
-export const getRandomRating = function (min, max) {
+const getRandomRating = function (min, max) {
   return ((Math.random() * max)).toFixed(1);
 };
 
 export const generateFilm = (idFilm) => {
+  const rating = getRandomRating(MIN_RATING, MAX_RATING);
   return {
     id: String(idFilm),
     background: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -141,16 +148,13 @@ export const generateFilm = (idFilm) => {
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     genre: getRandomLengthArray(GENRES, MAX_GENRES),
     year: String(getRandomIntFromRange(MIN_YEAR, MAX_YEAR)),
-    rating: getRandomRating(MIN_RATING, MAX_RATING),
-    ratingText: getRandomArrayItem(RATING_TEXT),
+    rating,
+    ratingText: createRatingText(rating),
     ratings: String(getRandomIntFromRange(MIN_RATINGS, MAX_RATINGS)),
-    description: createDiscription(),
+    description: createDescription(),
     director: getRandomArrayItem(NAMES),
     starring: getRandomLengthArray(NAMES, MAX_NAMES),
     runtime: getRandomTime(),
     reviews: createReviews(getRandomIntFromRange(0, MAX_REVIEWS)),
   };
 };
-
-// ratingText - быстро не сообразил как взять сгенерированный в этом объекте рейтинг и его прокинуть в функцию, поэтому пока так оставил
-

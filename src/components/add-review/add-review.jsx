@@ -1,7 +1,8 @@
 import React from "react";
-import CommentField from "../../components/comment-field/comment-field";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+
+import ReviewForm from "../../components/review-form/review-form";
 
 const AddReview = (props) => {
   const {params: {id}} = props.match;
@@ -47,7 +48,7 @@ const AddReview = (props) => {
         </div>
       </div>
 
-      <CommentField />
+      <ReviewForm />
 
     </section>
   );

@@ -1,14 +1,16 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {filmsListPropTypes} from "../../common-prop-types";
 import PropTypes from "prop-types";
-import {propTypesFilmsList} from "../../prop-types";
 
 const Film = (props) => {
-  const {filmsList} = props;
-  const {history, match} = props.routProps;
-  const {params: {id}, url} = match;
-  const addReviewUrl = `${url}/review`;
-  const film = filmsList.find((movie) => movie.id === id);
+
+  const {
+    filmsList,
+    routerProps: {history, match}
+  } = props;
+  const {params, url} = match;
+  const film = filmsList.find((movie) => movie.id === params.id);
 
   return (
     film ?
@@ -48,7 +50,7 @@ const Film = (props) => {
                 <div className="movie-card__buttons">
                   <button className="btn btn--play movie-card__button" type="button"
                     onClick={() => {
-                      history.push(`/player/${id}`);
+                      history.push(`/player/${params.id}`);
                     }}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"/>
@@ -61,7 +63,7 @@ const Film = (props) => {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <Link to={addReviewUrl} className="btn movie-card__button">Add review</Link>
+                  <Link to={`${url}/review`} className="btn movie-card__button">Add review</Link>
                 </div>
               </div>
             </div>
@@ -182,8 +184,8 @@ const Film = (props) => {
 };
 
 Film.propTypes = {
-  routProps: PropTypes.object,
-  filmsList: propTypesFilmsList
+  filmsList: filmsListPropTypes,
+  routerProps: PropTypes.object
 };
 
 export default Film;

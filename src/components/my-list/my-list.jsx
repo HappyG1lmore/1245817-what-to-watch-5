@@ -1,13 +1,14 @@
 import React, {PureComponent} from "react";
+import {filmsListPropTypes} from "../../common-prop-types";
+
 import SmallMovieCard from "./../small-movie-card/small-movie-card";
-import {propTypesFilmsList} from "../../prop-types";
 
 
 class MyList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      film: ``
+      film: null
     };
     this.props = props;
     this.onCardMouseEnter = this.onCardMouseEnter.bind(this);
@@ -19,7 +20,7 @@ class MyList extends PureComponent {
   }
 
   onCardMouseLeave() {
-    this.setState({film: ``});
+    this.setState({film: null});
   }
 
   render() {
@@ -88,7 +89,7 @@ class MyList extends PureComponent {
 }
 
 MyList.propTypes = {
-  filmsList: propTypesFilmsList
+  filmsList: filmsListPropTypes
 };
 
 export default MyList;

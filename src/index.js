@@ -8,7 +8,6 @@ const FILMS_COUNT = 8;
 const filmsList = new Array(FILMS_COUNT).fill().map((item, index) => {
   return generateFilm(index);
 });
-console.log(filmsList);
 
 const movie1 = {
   title: `The Grand Budapest Hotel`,

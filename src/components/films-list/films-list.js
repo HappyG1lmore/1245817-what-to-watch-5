@@ -1,32 +1,31 @@
 import React, {PureComponent} from "react";
+import {filmsListPropTypes} from "../../common-prop-types";
+
 import SmallMovieCard from "./../small-movie-card/small-movie-card";
-import {propTypesFilmsList} from "../../prop-types";
-import {Link} from "react-router-dom";
 
 class FilmsList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      film: ``
+      hoveredFilm: null
     };
-    this.props = props;
-    this.filmsList = props.filmsList;
     this.onCardMouseEnter = this.onCardMouseEnter.bind(this);
     this.onCardMouseLeave = this.onCardMouseLeave.bind(this);
   }
 
   onCardMouseEnter(id) {
-    this.setState({film: id});
+    this.setState({hoveredFilm: id});
   }
 
   onCardMouseLeave() {
-    this.setState({film: ``});
+    this.setState({hoveredFilm: null});
   }
 
   render() {
+    const {filmsList} = this.props;
     return (
       <React.Fragment>
-        {this.filmsList.map((film) => (
+        {filmsList.map((film) => (
           <SmallMovieCard
             key={film.id}
             film={film}
@@ -40,7 +39,7 @@ class FilmsList extends PureComponent {
 }
 
 FilmsList.propTypes = {
-  filmsList: propTypesFilmsList
+  filmsList: filmsListPropTypes
 };
 
 export default FilmsList;

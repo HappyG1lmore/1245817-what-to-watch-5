@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {filmsListPropTypes} from "../../common-prop-types";
+
 import FilmsList from "../../components/films-list/films-list";
-import {propTypesFilmsList} from "../../prop-types";
 
 const Main = (props) => {
-  const {title, genre, year} = props.mainFilm;
-  const {filmsList} = props;
+  const {filmsList,
+    mainFilm: {title, genre, year}
+  } = props;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -174,7 +176,7 @@ Main.propTypes = {
     genre: PropTypes.string,
     year: PropTypes.string
   }),
-  filmsList: propTypesFilmsList
+  filmsList: filmsListPropTypes
 };
 
 export default Main;
