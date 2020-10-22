@@ -9,8 +9,8 @@ class VideoPlayer extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {film, playedFilm} = this.props;
-    if (playedFilm === film.id) {
+    const {playPreview} = this.props;
+    if (playPreview) {
       this.videoRef.current.play();
     } else {
       this.videoRef.current.load();
@@ -18,15 +18,15 @@ class VideoPlayer extends PureComponent {
   }
 
   render() {
-    const {film} = this.props;
+    const {frame, videoLink, width, height, muted} = this.props;
     return (
       <video
         ref={this.videoRef}
-        poster={film.frame}
-        src={film.video}
-        muted
-        width="280"
-        height="175"
+        poster={frame}
+        src={videoLink}
+        muted = {muted}
+        width={width}
+        height={height}
       />
     );
   }
@@ -34,6 +34,12 @@ class VideoPlayer extends PureComponent {
 
 VideoPlayer.propTypes = {
   film: PropTypes.object,
-  playedFilm: PropTypes.any
+  playPreview: PropTypes.bool,
+  frame: PropTypes.string,
+  videoLink: PropTypes.string,
+  filmId: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  muted: PropTypes.bool
 };
 export default VideoPlayer;
