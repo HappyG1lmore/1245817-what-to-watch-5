@@ -1,5 +1,8 @@
 import React from "react";
 import ReactDom from "react-dom";
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import {reducer} from "./reducer";
 import App from "./components/app/app";
 
 import {generateFilm} from "./mocks/films";
@@ -15,8 +18,15 @@ const movie1 = {
   year: `2014`
 };
 
+export const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+);
+
 ReactDom.render(
-    <App mainFilm={movie1} filmsList={filmsList}/>,
+    <Provider store={store}>
+      <App mainFilm={movie1} filmsList={filmsList}/>,
+    </Provider>,
     document.querySelector(`#root`)
 );
 

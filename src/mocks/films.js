@@ -56,13 +56,15 @@ const NAMES = [
 ];
 
 const GENRES = [
-  `Drama`,
+  `Comedies`,
+  `Crime`,
+  `Documentary`,
+  `Dramas`,
   `Horror`,
-  `Triller`,
-  `Trash`,
-  `Road movie`,
-  `Film-Noir`,
-  `Mystery`
+  `Romance`,
+  `Kids & Family`,
+  `Sci-Fi`,
+  `Thrillers`
 ];
 
 const FRAMES = [

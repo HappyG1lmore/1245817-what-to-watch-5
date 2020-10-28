@@ -19,7 +19,7 @@ const App = (props) => {
           exact
           path="/"
           render = { () => (
-            <Main mainFilm={mainFilm} filmsList={filmsList}/>
+            <Main mainFilm={mainFilm} />
           )}
         />
         <Route exact path="/login">
