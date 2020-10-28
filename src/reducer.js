@@ -1,7 +1,7 @@
 import {extend} from "./utils";
 import {ActionType} from "./action";
 import {generateFilm} from "./mocks/films";
-import {All} from "./constants";
+import {FILTER_ALL} from "./constants";
 
 const FILMS_COUNT = 8;
 const filmsList = new Array(FILMS_COUNT).fill().map((item, index) => {
@@ -9,7 +9,7 @@ const filmsList = new Array(FILMS_COUNT).fill().map((item, index) => {
 });
 
 const initialState = {
-  genre: All,
+  genre: FILTER_ALL,
   filmsList,
   filteredFilms: filmsList
 };

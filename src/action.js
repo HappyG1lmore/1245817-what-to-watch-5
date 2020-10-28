@@ -1,5 +1,5 @@
 import {store} from "./index";
-import {All} from "./constants";
+import {FILTER_ALL} from "./constants";
 
 export const ActionType = {
   CHANGE_FILTER_GENRE: `CHANGE_FILTER_GENRE`,
@@ -16,7 +16,7 @@ export const changeFilterGenre = (genre) => {
 export const filterFilmsByGenre = (genre) => {
   const films = store.getState().filmsList;
   const filteredFilms = films.filter((film) => {
-    if (genre === All) {
+    if (genre === FILTER_ALL) {
       return true;
     }
     return film.genre.includes(genre);

@@ -1,2 +1,2 @@
 
-export const All = `All`;
+export const FILTER_ALL = `All`;
