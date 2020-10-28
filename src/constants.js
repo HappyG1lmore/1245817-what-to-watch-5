@@ -1,2 +1,2 @@
 
-export const FILTER_ALL = `All`;
+export const ALL_GENRES = `All`;
