@@ -529,6 +529,7 @@ main {
   text-decoration: none;
   position: relative;
   padding-bottom: 15px;
+  cursor: pointer;
   -webkit-transition: font-weight;
   transition: font-weight; }
   .catalog__genres-link::after {

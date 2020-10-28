@@ -31,3 +31,7 @@ export const getRandomDate = () => {
   const currentDate = new Date();
   return moment(currentDate).format(`DD MMMM YYYY`);
 };
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
