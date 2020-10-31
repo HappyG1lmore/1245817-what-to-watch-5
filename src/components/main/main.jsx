@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {filmsListPropTypes} from "../../common-prop-types";
 import {connect} from "react-redux";
-import {ALL_GENRES} from "./constants";
+import {ALL_GENRES} from "../../constants";
 import GenresList from "../genres-list/genres-list";
 import FilmsList from "../films-list/films-list";
 
@@ -152,4 +152,5 @@ const mapStateToProps = (state) => {
   };
 };
 
+export {Main};
 export default connect(mapStateToProps)(Main);
