@@ -11,7 +11,6 @@ import Player from "./../player/player";
 
 const App = (props) => {
   const {mainFilm, filmsList} = props;
-
   return (
     <BrowserRouter>
       <Switch>
