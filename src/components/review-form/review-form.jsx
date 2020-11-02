@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {withAddReview} from "../../hocs/with-add-review-state";
+import {withAddReviewState} from "../../hocs/with-add-review-state";
 
 const ReviewForm = (props) => {
   const {handleSubmit, handleFieldChange} = props;
   return (
     <div className="add-review">
-      <form className="add-review__form"
-        onSubmit={handleSubmit}>
+      <form className="add-review__form" onSubmit={handleSubmit}>
         <div className="rating">
           <div className="rating__stars">
             <input className="rating__input" id="star-1" type="radio" name="rating" value="1"/>
@@ -44,9 +43,9 @@ const ReviewForm = (props) => {
   );
 };
 
-export default withAddReview(ReviewForm);
-
 ReviewForm.propTypes = {
   handleSubmit: PropTypes.func,
   handleFieldChange: PropTypes.func,
 };
+
+export default withAddReviewState(ReviewForm);

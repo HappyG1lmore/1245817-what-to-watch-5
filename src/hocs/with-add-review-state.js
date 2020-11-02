@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 
-export const withAddReview = (Component) => {
-  return class addReview extends PureComponent {
+export const withAddReviewState = (Component) => {
+  return class AddReview extends PureComponent {
     constructor(props) {
       super(props);
 

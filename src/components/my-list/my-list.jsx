@@ -4,7 +4,7 @@ import SmallMovieCard from "../small-movie-card/small-movie-card";
 import PropTypes from "prop-types";
 
 export const MyList = (props) => {
-  const {filmsList, onCardMouseEnter, onCardMouseLeave} = props;
+  const {filmsList} = props;
 
   return (
     <div className="user-page">
@@ -44,8 +44,6 @@ export const MyList = (props) => {
             <SmallMovieCard
               key={film.id}
               film={film}
-              onCardMouseEnter={onCardMouseEnter}
-              onCardMouseLeave={onCardMouseLeave}
             />
           ))}
         </div>

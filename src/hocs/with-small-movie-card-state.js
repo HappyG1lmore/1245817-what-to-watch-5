@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
-
-const HOVER_TIMEOUT = 1000;
+import {PLAY_PREVIEW_TIMEOUT} from "../constants";
 
 export const withSmallMovieCardState = (Component) => {
   return class SmallMovieCardState extends PureComponent {
@@ -18,7 +17,7 @@ export const withSmallMovieCardState = (Component) => {
     handleMouseEnter() {
       this.cardHoverTimeout = setTimeout(() => {
         this.setState({playPreview: true});
-      }, HOVER_TIMEOUT);
+      }, PLAY_PREVIEW_TIMEOUT);
     }
 
     handleMouseLeave() {

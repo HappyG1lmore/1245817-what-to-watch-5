@@ -4,14 +4,10 @@ import {Link} from "react-router-dom";
 import VideoPlayer from "../../components/video-player/video-player";
 import PropTypes from "prop-types";
 import {withSmallMovieCardState} from "../../hocs/with-small-movie-card-state";
+import {FilmPreviewSize} from "../../constants";
 
 const SmallMovieCard = (props) => {
   const {film, handleMouseEnter, handleMouseLeave, playPreview} = props;
-
-  const PreviewSize = {
-    WIDTH: `280`,
-    HEIGHT: `175`
-  };
 
   return (
     <article
@@ -24,8 +20,8 @@ const SmallMovieCard = (props) => {
           poster={film.frame}
           src={film.video}
           playPreview={playPreview}
-          width={PreviewSize.WIDTH}
-          height={PreviewSize.HEIGHT}
+          width={FilmPreviewSize.WIDTH}
+          height={FilmPreviewSize.HEIGHT}
           muted
         />
       </Link>
@@ -49,4 +45,5 @@ SmallMovieCard.propTypes = {
   playPreview: PropTypes.bool
 };
 
+export {SmallMovieCard};
 export default withSmallMovieCardState(SmallMovieCard);
