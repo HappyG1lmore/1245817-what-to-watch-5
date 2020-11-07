@@ -15,9 +15,7 @@ const Main = (props) => {
 
   const filmGenres = Array.from(
       filmsList.reduce((acc, film) => {
-        for (let item of film.genre) {
-          acc.add(item);
-        }
+        acc.add(film.genre);
         return acc;
       }, new Set([ALL_GENRES]))
   );
@@ -103,7 +101,7 @@ const Main = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <ul className="catalog__genres-list">
-            <GenresList filmGenres={filmGenres}/>
+            { <GenresList filmGenres={filmGenres}/>}
           </ul>
 
           <div className="catalog__movies-list">
@@ -142,11 +140,13 @@ Main.propTypes = {
     year: PropTypes.string
   }),
   filmsList: filmsListPropTypes,
-  filteredFilms: filmsListPropTypes
+  filteredFilms: filmsListPropTypes,
+  isFilmsFetching: PropTypes.bool
 };
 
 const mapStateToProps = (state) => {
   return {
+    isFilmsFetching: state.isFilmsFetching,
     filmsList: state.filmsList,
     filteredFilms: state.filteredFilms
   };

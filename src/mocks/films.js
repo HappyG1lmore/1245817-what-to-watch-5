@@ -81,8 +81,7 @@ const FRAMES = [
   `img/moonrise-kingdom.jpg`,
 ];
 
-// eslint-disable-next-line consistent-return
-const createRatingText = (rating) => {
+export const createRatingTextQ = (rating) => {
   let ratingText = null;
   switch (rating) {
     case (rating <= 3):
@@ -103,6 +102,7 @@ const createRatingText = (rating) => {
   }
   return ratingText;
 };
+
 
 const createDescription = function () {
   const phrases = getRandomLengthArray(PHRASE, MAX_PHRASE);
@@ -139,7 +139,7 @@ export const generateFilm = (idFilm) => {
     genre: getRandomLengthArray(GENRES, MAX_GENRES),
     year: String(getRandomIntFromRange(MIN_YEAR, MAX_YEAR)),
     rating,
-    ratingText: createRatingText(Number(rating)),
+    ratingText: createRatingTextQ(Number(rating)),
     ratings: String(getRandomIntFromRange(MIN_RATINGS, MAX_RATINGS)),
     description: createDescription(),
     director: getRandomArrayItem(NAMES),

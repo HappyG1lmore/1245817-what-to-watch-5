@@ -7,3 +7,5 @@ export const FilmPreviewSize = {
 };
 
 export const PLAY_PREVIEW_TIMEOUT = 1000;
+export const API_TIMEOUT = 5000;
+

@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {filterFilmsByGenre, changeFilterGenre} from "../../action";
+import {filterFilmsByGenre, changeFilterGenre} from "../../store/action";
 
 const GenresList = (props) => {
   const {
