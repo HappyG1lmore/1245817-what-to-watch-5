@@ -37,7 +37,6 @@ const SmallMovieCard = (props) => {
   );
 };
 
-
 SmallMovieCard.propTypes = {
   film: filmPropTypes,
   handleMouseEnter: PropTypes.func,

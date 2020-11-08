@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {ALL_GENRES} from "../../constants";
 import GenresList from "../genres-list/genres-list";
 import FilmsList from "../films-list/films-list";
+import {filteredFilmsSelector} from "../../store/selectors";
 
 const Main = (props) => {
   const {
@@ -148,7 +149,7 @@ const mapStateToProps = (state) => {
   return {
     isFilmsFetching: state.isFilmsFetching,
     filmsList: state.filmsList,
-    filteredFilms: state.filteredFilms
+    filteredFilms: filteredFilmsSelector(state)
   };
 };
 

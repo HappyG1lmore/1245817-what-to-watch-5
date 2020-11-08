@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
-
 class VideoPlayer extends PureComponent {
   constructor(props) {
     super(props);

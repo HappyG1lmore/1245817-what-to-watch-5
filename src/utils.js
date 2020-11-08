@@ -39,25 +39,20 @@ export const extend = (a, b) => {
 export const createRatingText = (rating) => {
 
   let ratingText = null;
-  switch (rating) {
+  switch (true) {
     case (rating <= 3):
-      console.log(`TRUE !!!`)
       ratingText = `Bad`;
       break;
     case (rating > 3 && rating <= 5):
-      console.log(`TRUE !!!`)
       ratingText = `Normal`;
       break;
     case (rating > 5 && rating <= 8):
-      console.log(`TRUE !!!`)
       ratingText = `Good`;
       break;
     case (rating > 8 && rating < 10):
-      console.log(`TRUE !!!`)
       ratingText = `Very good`;
       break;
     case (rating === 10):
-      console.log(`TRUE !!!`)
       ratingText = `Awesome`;
       break;
   }

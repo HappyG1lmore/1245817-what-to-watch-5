@@ -10,7 +10,6 @@ const Film = (props) => {
   } = props;
   const {params, url} = match;
   const film = filmsList.find((movie) => String(movie.id) === params.id);
-  console.log(film);
 
   return (
     film ?
