@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {filmsListPropTypes, routerPropTypes} from "../../common-prop-types";
 import PropTypes from "prop-types";
@@ -6,7 +7,8 @@ import PropTypes from "prop-types";
 const Film = (props) => {
   const {
     filmsList,
-    routerProps: {history, match}
+    history,
+    match
   } = props;
   const {params, url} = match;
   const film = filmsList.find((movie) => String(movie.id) === params.id);
@@ -185,7 +187,19 @@ const Film = (props) => {
 
 Film.propTypes = {
   filmsList: filmsListPropTypes,
-  routerProps: PropTypes.shape(routerPropTypes)
+  routerProps: PropTypes.shape(routerPropTypes),
+  history: PropTypes.object,
+  match: PropTypes.object,
+  params: PropTypes.object,
+  url: PropTypes.string,
 };
 
-export default Film;
+const mapStateToProps = (state) => {
+  return {
+    filmsList: state.filmsList
+  };
+};
+
+export {Film};
+export default connect(mapStateToProps)(Film);
+

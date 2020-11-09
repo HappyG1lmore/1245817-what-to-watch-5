@@ -27,7 +27,6 @@ export const withSmallMovieCardState = (Component) => {
 
     componentWillUnmount() {
       clearTimeout(this.cardHoverTimeout);
-      this.setState({playPreview: false});
     }
 
     render() {

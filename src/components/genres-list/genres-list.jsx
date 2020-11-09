@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {filterFilmsByGenre, changeFilterGenre} from "../../store/action";
+import {changeFilterGenre} from "../../store/actions";
 
 const GenresList = (props) => {
   const {
@@ -12,7 +12,6 @@ const GenresList = (props) => {
 
   const handleMouseClick = (genre) => {
     changeFilterGenreAction(genre);
-    filterFilmsByGenreAction(genre);
   };
 
   return (
@@ -56,7 +55,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispath) => {
   return {
     changeFilterGenreAction: (genre) => dispath(changeFilterGenre(genre)),
-    filterFilmsByGenreAction: (genre) => dispath(filterFilmsByGenre(genre))
   };
 };
 

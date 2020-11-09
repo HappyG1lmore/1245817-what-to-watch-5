@@ -15,3 +15,13 @@ export const filteredFilmsSelector = createSelector(
           return film.genre === genreFilter;
         })
 );
+
+export const getFilmGenres = createSelector(
+    filmsListSelector,
+    (filmList) => Array.from(
+        filmList.reduce((acc, film) => {
+          acc.add(film.genre);
+          return acc;
+        }, new Set([ALL_GENRES]))
+    )
+);

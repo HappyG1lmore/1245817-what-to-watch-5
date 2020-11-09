@@ -29,7 +29,6 @@ export const getFilms = () => {
   const api = createAPI();
   return api.get(`/films`)
     .then((res) => {
-      console.log(`Api data`, res.data);
       return res.data;
     })
     .catch((err) => {

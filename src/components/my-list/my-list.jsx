@@ -1,9 +1,10 @@
 import React from "react";
+import {connect} from "react-redux";
 import {filmsListPropTypes} from "../../common-prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
 import PropTypes from "prop-types";
 
-export const MyList = (props) => {
+const MyList = (props) => {
   const {filmsList} = props;
 
   return (
@@ -72,4 +73,11 @@ MyList.propTypes = {
   onCardMouseLeave: PropTypes.func,
 };
 
-export default MyList;
+const mapStateToProps = (state) => {
+  return {
+    filmsList: state.filmsList,
+  };
+};
+
+export {MyList};
+export default connect(mapStateToProps)(MyList);

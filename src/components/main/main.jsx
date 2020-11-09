@@ -2,24 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import {filmsListPropTypes} from "../../common-prop-types";
 import {connect} from "react-redux";
-import {ALL_GENRES} from "../../constants";
 import GenresList from "../genres-list/genres-list";
 import FilmsList from "../films-list/films-list";
-import {filteredFilmsSelector} from "../../store/selectors";
+import {filteredFilmsSelector, getFilmGenres} from "../../store/selectors";
 
 const Main = (props) => {
   const {
-    filmsList,
     filteredFilms,
+    filmsGenres,
     mainFilm: {title, genre, year}
   } = props;
-
-  const filmGenres = Array.from(
-      filmsList.reduce((acc, film) => {
-        acc.add(film.genre);
-        return acc;
-      }, new Set([ALL_GENRES]))
-  );
 
   return (
     <React.Fragment>
@@ -102,7 +94,7 @@ const Main = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <ul className="catalog__genres-list">
-            { <GenresList filmGenres={filmGenres}/>}
+            <GenresList filmGenres={filmsGenres} />
           </ul>
 
           <div className="catalog__movies-list">
@@ -142,14 +134,15 @@ Main.propTypes = {
   }),
   filmsList: filmsListPropTypes,
   filteredFilms: filmsListPropTypes,
-  isFilmsFetching: PropTypes.bool
+  isFilmsFetching: PropTypes.bool,
+  filmsGenres: PropTypes.array
 };
 
 const mapStateToProps = (state) => {
   return {
-    isFilmsFetching: state.isFilmsFetching,
     filmsList: state.filmsList,
-    filteredFilms: filteredFilmsSelector(state)
+    filteredFilms: filteredFilmsSelector(state),
+    filmsGenres: getFilmGenres(state)
   };
 };
 

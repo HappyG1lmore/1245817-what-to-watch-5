@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {filmsListPropTypes} from "../../common-prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import Main from "./../main/main";
@@ -9,20 +8,17 @@ import MyList from "./../my-list/my-list";
 import Film from "./../film/film";
 import AddReview from "./../add-review/add-review";
 import Player from "./../player/player";
-import {fetchFilms} from "../../store/action";
+import {fetchFilms} from "../../store/actions";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
-    const {getFilms} = this.props;
-    getFilms();
+    const {fetchFilmsAction} = this.props;
+    fetchFilmsAction();
   }
 
   render() {
-    const {mainFilm, isFilmsFetching, filmsList} = this.props;
+    const {mainFilm} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -30,7 +26,7 @@ class App extends React.Component {
             exact
             path="/"
             render={() => (
-              <Main mainFilm={mainFilm} isFilmsFetching={isFilmsFetching}/>
+              <Main mainFilm={mainFilm}/>
             )}
           />
           <Route exact path="/login">
@@ -40,19 +36,15 @@ class App extends React.Component {
             exact
             path="/mylist"
             render={() => (
-              <MyList filmsList={filmsList}/>
+              <MyList />
             )}
           />
           <Route
             exact
             path="/films/:id?"
-            render={(routerProps) => (
-              <Film routerProps={routerProps} filmsList={filmsList}/>
-            )}
+            component={Film}
           />
-          <Route exact path="/player/:id?">
-            <Player/>
-          </Route>
+          <Route exact path="/player/:id?" component={Player} />
           <Route exact path="/films/:id/review" component={AddReview}/>
         </Switch>
       </BrowserRouter>
@@ -60,16 +52,9 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isFilmsFetching: state.isFilmsFetching,
-    filmsList: state.filmsList
-  };
-};
-
 const mapDispatchToProps = (dispath) => {
   return {
-    getFilms: () => dispath(fetchFilms()),
+    fetchFilmsAction: () => dispath(fetchFilms()),
   };
 };
 
@@ -79,10 +64,8 @@ App.propTypes = {
     genre: PropTypes.string,
     year: PropTypes.string
   }),
-  getFilms: PropTypes.func,
-  isFilmsFetching: PropTypes.bool,
-  filmsList: filmsListPropTypes
+  fetchFilmsAction: PropTypes.func,
 };
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
