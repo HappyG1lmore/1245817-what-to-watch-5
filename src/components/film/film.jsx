@@ -187,7 +187,6 @@ const Film = (props) => {
 
 Film.propTypes = {
   filmsList: filmsListPropTypes,
-  routerProps: PropTypes.shape(routerPropTypes),
   history: PropTypes.object,
   match: PropTypes.object,
   params: PropTypes.object,

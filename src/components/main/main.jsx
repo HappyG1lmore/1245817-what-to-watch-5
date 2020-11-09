@@ -4,7 +4,7 @@ import {filmsListPropTypes} from "../../common-prop-types";
 import {connect} from "react-redux";
 import GenresList from "../genres-list/genres-list";
 import FilmsList from "../films-list/films-list";
-import {filteredFilmsSelector, getFilmGenres} from "../../store/selectors";
+import {filteredFilmsSelector, genresFilterSelector} from "../../store/selectors";
 
 const Main = (props) => {
   const {
@@ -14,7 +14,7 @@ const Main = (props) => {
   } = props;
 
   return (
-    <React.Fragment>
+    <>
       <section className="movie-card">
         <div className="movie-card__bg">
           <img
@@ -122,7 +122,7 @@ const Main = (props) => {
           </div>
         </footer>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -135,14 +135,14 @@ Main.propTypes = {
   filmsList: filmsListPropTypes,
   filteredFilms: filmsListPropTypes,
   isFilmsFetching: PropTypes.bool,
-  filmsGenres: PropTypes.array
+  filmsGenres: PropTypes.arrayOf(String)
 };
 
 const mapStateToProps = (state) => {
   return {
     filmsList: state.filmsList,
     filteredFilms: filteredFilmsSelector(state),
-    filmsGenres: getFilmGenres(state)
+    filmsGenres: genresFilterSelector(state)
   };
 };
 

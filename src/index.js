@@ -17,8 +17,7 @@ const composeEnhancers = (typeof window !== `undefined` && window.__REDUX_DEVTOO
 
 export const store = createStore(
     reducer,
-    composeEnhancers(
-        applyMiddleware(thunk.withExtraArgument(api)))
+    composeEnhancers(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
 ReactDom.render(

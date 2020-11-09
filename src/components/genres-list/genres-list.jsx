@@ -7,7 +7,6 @@ const GenresList = (props) => {
   const {
     filmGenres,
     changeFilterGenreAction,
-    filterFilmsByGenreAction,
   } = props;
 
   const handleMouseClick = (genre) => {

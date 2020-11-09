@@ -2,7 +2,6 @@ import {adaptFilmsToClient} from "../utils";
 
 export const ActionType = {
   CHANGE_FILTER_GENRE: `CHANGE_FILTER_GENRE`,
-  FILTER_FILMS_BY_GENRE: `FILTER_FILMS_BY_GENRE`,
   FETCH_FILMS_SUCCESS: `FETCH_FILMS_SUCCESS`,
 };
 

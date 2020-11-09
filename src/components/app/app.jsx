@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
@@ -10,7 +10,7 @@ import AddReview from "./../add-review/add-review";
 import Player from "./../player/player";
 import {fetchFilms} from "../../store/actions";
 
-class App extends React.Component {
+class App extends PureComponent {
 
   componentDidMount() {
     const {fetchFilmsAction} = this.props;
@@ -22,29 +22,13 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <Main mainFilm={mainFilm}/>
-            )}
-          />
-          <Route exact path="/login">
-            <SignIn/>
-          </Route>
-          <Route
-            exact
-            path="/mylist"
-            render={() => (
-              <MyList />
-            )}
-          />
-          <Route
-            exact
-            path="/films/:id?"
-            component={Film}
-          />
-          <Route exact path="/player/:id?" component={Player} />
+          <Route exact path="/" render={() => (
+            <Main mainFilm={mainFilm}/>
+          )}/>
+          <Route exact path="/login"> <SignIn/> </Route>
+          <Route exact path="/mylist" component={MyList}/>
+          <Route exact path="/films/:id?" component={Film}/>
+          <Route exact path="/player/:id?" component={Player}/>
           <Route exact path="/films/:id/review" component={AddReview}/>
         </Switch>
       </BrowserRouter>

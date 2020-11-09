@@ -7,16 +7,18 @@ const genreFilterSelector = (state) => state.genre;
 export const filteredFilmsSelector = createSelector(
     filmsListSelector,
     genreFilterSelector,
-    (filmList, genreFilter) => filmList.filter(
-        (film) => {
-          if (genreFilter === ALL_GENRES) {
-            return true;
-          }
-          return film.genre === genreFilter;
-        })
+    (filmList, genreFilter) => {
+      filmList.filter(
+          (film) => {
+            if (genreFilter === ALL_GENRES) {
+              return true;
+            }
+            return film.genre === genreFilter;
+          });
+    }
 );
 
-export const getFilmGenres = createSelector(
+export const genresFilterSelector = createSelector(
     filmsListSelector,
     (filmList) => Array.from(
         filmList.reduce((acc, film) => {

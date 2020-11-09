@@ -19,7 +19,7 @@ export const filmPropTypes = PropTypes.shape({
   reviews: PropTypes.string
 });
 
-export const filmsListPropTypes = PropTypes.arrayOf(PropTypes.object);
+export const filmsListPropTypes = PropTypes.arrayOf(filmPropTypes);
 
 export const routerPropTypes = {
   match: PropTypes.object,
