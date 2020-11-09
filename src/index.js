@@ -1,16 +1,11 @@
 import React from "react";
 import ReactDom from "react-dom";
-import {createStore} from "redux";
+import {createStore, applyMiddleware, compose} from "redux";
 import {Provider} from "react-redux";
-import {reducer} from "./reducer";
+import thunk from "redux-thunk";
 import App from "./components/app/app";
-
-import {generateFilm} from "./mocks/films";
-
-const FILMS_COUNT = 8;
-const filmsList = new Array(FILMS_COUNT).fill().map((item, index) => {
-  return generateFilm(index);
-});
+import {api} from "./api";
+import {reducer} from "./store/reducer";
 
 const movie1 = {
   title: `The Grand Budapest Hotel`,
@@ -18,14 +13,16 @@ const movie1 = {
   year: `2014`
 };
 
+const composeEnhancers = (typeof window !== `undefined` && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
 export const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    composeEnhancers(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
 ReactDom.render(
     <Provider store={store}>
-      <App mainFilm={movie1} filmsList={filmsList}/>,
+      <App mainFilm={movie1} />,
     </Provider>,
     document.querySelector(`#root`)
 );

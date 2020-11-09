@@ -2,28 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import {filmsListPropTypes} from "../../common-prop-types";
 import {connect} from "react-redux";
-import {ALL_GENRES} from "../../constants";
 import GenresList from "../genres-list/genres-list";
 import FilmsList from "../films-list/films-list";
+import {filteredFilmsSelector, genresFilterSelector} from "../../store/selectors";
 
 const Main = (props) => {
   const {
-    filmsList,
     filteredFilms,
+    filmsGenres,
     mainFilm: {title, genre, year}
   } = props;
 
-  const filmGenres = Array.from(
-      filmsList.reduce((acc, film) => {
-        for (let item of film.genre) {
-          acc.add(item);
-        }
-        return acc;
-      }, new Set([ALL_GENRES]))
-  );
-
   return (
-    <React.Fragment>
+    <>
       <section className="movie-card">
         <div className="movie-card__bg">
           <img
@@ -103,7 +94,7 @@ const Main = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <ul className="catalog__genres-list">
-            <GenresList filmGenres={filmGenres}/>
+            <GenresList filmGenres={filmsGenres} />
           </ul>
 
           <div className="catalog__movies-list">
@@ -131,7 +122,7 @@ const Main = (props) => {
           </div>
         </footer>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -142,13 +133,16 @@ Main.propTypes = {
     year: PropTypes.string
   }),
   filmsList: filmsListPropTypes,
-  filteredFilms: filmsListPropTypes
+  filteredFilms: filmsListPropTypes,
+  isFilmsFetching: PropTypes.bool,
+  filmsGenres: PropTypes.arrayOf(String)
 };
 
 const mapStateToProps = (state) => {
   return {
     filmsList: state.filmsList,
-    filteredFilms: state.filteredFilms
+    filteredFilms: filteredFilmsSelector(state),
+    filmsGenres: genresFilterSelector(state)
   };
 };
 
