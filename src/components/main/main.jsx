@@ -135,14 +135,14 @@ Main.propTypes = {
   filmsList: filmsListPropTypes,
   filteredFilms: filmsListPropTypes,
   isFilmsFetching: PropTypes.bool,
-  filmsGenres: PropTypes.arrayOf(String)
+  filmsGenres: PropTypes.arrayOf(PropTypes.string)
 };
 
 const mapStateToProps = (state) => {
   return {
-    filmsList: state.filmsList,
-    filteredFilms: filteredFilmsSelector(state),
-    filmsGenres: genresFilterSelector(state)
+    filmsList: state.films.filmsList,
+    filteredFilms: filteredFilmsSelector(state.films),
+    filmsGenres: genresFilterSelector(state.films)
   };
 };
 

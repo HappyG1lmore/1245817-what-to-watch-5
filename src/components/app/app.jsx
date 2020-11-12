@@ -8,7 +8,9 @@ import MyList from "./../my-list/my-list";
 import Film from "./../film/film";
 import AddReview from "./../add-review/add-review";
 import Player from "./../player/player";
-import {fetchFilms} from "../../store/actions";
+import {fetchFilms} from "../../store/films/actions";
+import {requireAuthorization} from "../../store/users/actions";
+import {store} from "../../index";
 
 class App extends PureComponent {
 
@@ -19,11 +21,13 @@ class App extends PureComponent {
 
   render() {
     const {mainFilm} = this.props;
+
+
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={() => (
-            <Main mainFilm={mainFilm}/>
+            <Main mainFilm={mainFilm} />
           )}/>
           <Route exact path="/login"> <SignIn/> </Route>
           <Route exact path="/mylist" component={MyList}/>
@@ -48,7 +52,9 @@ App.propTypes = {
     genre: PropTypes.string,
     year: PropTypes.string
   }),
+  login: PropTypes.func,
   fetchFilmsAction: PropTypes.func,
+  authorizationStatus: PropTypes.bool
 };
 
 export {App};

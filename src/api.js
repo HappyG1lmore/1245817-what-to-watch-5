@@ -1,5 +1,6 @@
 import axios from "axios";
 import {API_TIMEOUT} from "./constants";
+import {Error} from "./constants";
 
 const createAPI = (onUnauthorized) => {
   const api = axios.create({
@@ -8,7 +9,7 @@ const createAPI = (onUnauthorized) => {
     withCredentials: true
   });
 
-  const onSuccess = (response) =>{
+  const onSuccess = (response) => {
     return response;
   };
 
@@ -16,6 +17,7 @@ const createAPI = (onUnauthorized) => {
     const {response} = err;
 
     if (response.status === Error.UNAUTHORIZED) {
+      onUnauthorized();
       throw err;
     }
     throw err;
@@ -32,8 +34,30 @@ export const getFilms = () => {
       return res.data;
     })
     .catch((err) => {
-      console.log(err.response.data.error);
+      console.log(`Ошибка`, err.response.data.error);
     });
 };
 
-export const api = {getFilms};
+export const authorization = () => {
+  const api = createAPI();
+  return api.get(`/login`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(`Ошибка`, err.response.data.error);
+    });
+};
+
+export const sendUserData = ({login: email, password}) => {
+  const api = createAPI();
+  return api.post(`/login`, {email, password})
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(`Ошибка`, err.response.data.error);
+    });
+};
+
+export const api = {getFilms, authorization, sendUserData};

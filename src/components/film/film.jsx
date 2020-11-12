@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {filmsListPropTypes, routerPropTypes} from "../../common-prop-types";
+import {filmsListPropTypes} from "../../common-prop-types";
 import PropTypes from "prop-types";
 
 const Film = (props) => {
@@ -195,7 +195,7 @@ Film.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    filmsList: state.filmsList
+    filmsList: state.films.filmsList
   };
 };
 

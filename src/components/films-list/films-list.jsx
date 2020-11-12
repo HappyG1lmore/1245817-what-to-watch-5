@@ -4,6 +4,7 @@ import {filmsListPropTypes} from "../../common-prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
 
 const FilmsList = (props) => {
+
   const {filmsList} = props;
 
   return (

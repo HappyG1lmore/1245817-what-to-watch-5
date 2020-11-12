@@ -1,4 +1,4 @@
-import {adaptFilmsToClient} from "../utils";
+import {adaptFilmsToClient} from "../../utils";
 
 export const ActionType = {
   CHANGE_FILTER_GENRE: `CHANGE_FILTER_GENRE`,
