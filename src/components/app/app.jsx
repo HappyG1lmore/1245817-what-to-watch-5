@@ -6,11 +6,10 @@ import Main from "./../main/main";
 import SignIn from "./../sign-in/sign-in";
 import MyList from "./../my-list/my-list";
 import Film from "./../film/film";
+import PrivateRoute from "../private-route/private-route";
 import AddReview from "./../add-review/add-review";
 import Player from "./../player/player";
 import {fetchFilms} from "../../store/films/actions";
-import {requireAuthorization} from "../../store/users/actions";
-import {store} from "../../index";
 
 class App extends PureComponent {
 
@@ -22,7 +21,6 @@ class App extends PureComponent {
   render() {
     const {mainFilm} = this.props;
 
-
     return (
       <BrowserRouter>
         <Switch>
@@ -30,11 +28,20 @@ class App extends PureComponent {
             <Main mainFilm={mainFilm} />
           )}/>
           <Route exact path="/login"> <SignIn/> </Route>
-          <Route exact path="/mylist" component={MyList}/>
+          <PrivateRoute
+            exact
+            path={`/mylist`}
+            render={() => <MyList />}
+          />
           <Route exact path="/films/:id?" component={Film}/>
           <Route exact path="/player/:id?" component={Player}/>
-          <Route exact path="/films/:id/review" component={AddReview}/>
-        </Switch>
+          <PrivateRoute
+            exact
+            path={`/films/:id/review`}
+            render={(routerProps) => <AddReview {...routerProps} />}
+          />
+
+        </Switch>/films/:id/review
       </BrowserRouter>
     );
   }

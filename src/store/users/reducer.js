@@ -1,14 +1,9 @@
 import {extend} from "../../utils";
-import {ActionType} from "../../actions";
-import {authorizationStatus} from "../../constants";
-
-const AUTHORIZE_STATUS = {
-  NO_AUTH: NO_AUTH,
-  AUTH: AUTH
-};
+import {ActionType} from "./actions";
+import {AuthorizationStatus} from "../../constants";
 
 const initialState = {
-  authorizationStatus: authorizationStatus.NO_AUTH,
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,3 +16,5 @@ const reducer = (state = initialState, action) => {
 
   return state;
 };
+
+export {reducer};

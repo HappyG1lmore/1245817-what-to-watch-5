@@ -1,4 +1,5 @@
-import {authorizationStatus} from "../../constants";
+import {AuthorizationStatus} from "../../constants";
+
 
 export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`
@@ -15,7 +16,7 @@ export const checkAuth = () => {
   return (dispatch, getState, api) => {
     api.authorization()
       .then(() => {
-        dispatch(requireAuthorization(authorizationStatus.AUTH));
+        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
         throw err;
@@ -23,11 +24,11 @@ export const checkAuth = () => {
   };
 };
 
-export const login = () => {
+export const login = (email, password) => {
   return (dispatch, getState, api) => {
-    api.sendUserData()
+    api.sendUserData({email, password})
       .then(() => {
-        dispatch(requireAuthorization(authorizationStatus.AUTH));
+        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
         throw err;

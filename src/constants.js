@@ -10,7 +10,7 @@ export const Error = {
   UNAUTHORIZED: 401
 };
 
-export const authorizationStatus = {
+export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
   AUTH: `AUTH`
 };

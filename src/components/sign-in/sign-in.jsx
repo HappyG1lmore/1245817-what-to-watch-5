@@ -1,31 +1,51 @@
 import React from "react";
+import PropTypes from "prop-types";
+import {withLoginState} from "../../hocs/with-login-state";
+import {Link} from "react-router-dom";
+import {login} from "../../store/users/actions";
+import {connect} from "react-redux";
+import Header from "../header/header";
+import {Redirect} from "react-router-dom";
 
-const SignIn = () => {
+const SignIn = (props) => {
+  const {
+    handleFieldChange,
+    loginAction,
+    state,
+    authorizationStatus
+  } = props;
+  const password = state.userPassword;
+  const email = state.userEmail;
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    loginAction(email, password);
+  };
+
+  if (authorizationStatus === `AUTH`) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div className="user-page">
-      <header className="page-header user-page__head">
-        <div className="logo">
-          <a href="main.html" className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
+      <Header
+        className={`user-page__head`}
+        withUserBlock={false}
+      >
         <h1 className="page-title user-page__title">Sign in</h1>
-      </header>
+      </Header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
-              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                id="user-email"/>
+              <input className="sign-in__input" type="email" placeholder="Email address" name="userEmail"
+                id="userEmail" onChange={handleFieldChange}/>
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                id="user-password"/>
+              <input className="sign-in__input" type="password" placeholder="Password" name="userPassword"
+                id="userPassword" onChange={handleFieldChange}/>
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
@@ -37,11 +57,11 @@ const SignIn = () => {
 
       <footer className="page-footer">
         <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
+          <Link to={`/`} className="logo__link logo__link--light">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
 
         <div className="copyright">
@@ -52,4 +72,24 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+SignIn.propTypes = {
+  handleFieldChange: PropTypes.func,
+  loginAction: PropTypes.func,
+  state: PropTypes.object,
+  authorizationStatus: PropTypes.string
+};
+
+const mapStateToProps = (state) => {
+  return {
+    authorizationStatus: state.users.authorizationStatus
+  };
+};
+
+const mapDispatchToProps = (dispath) => {
+  return {
+    loginAction: (email, password) => dispath(login(email, password)),
+  };
+};
+
+export {SignIn};
+export default connect(mapStateToProps, mapDispatchToProps)(withLoginState(SignIn));

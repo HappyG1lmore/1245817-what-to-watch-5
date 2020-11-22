@@ -4,15 +4,17 @@ import {filmsListPropTypes} from "../../common-prop-types";
 import {connect} from "react-redux";
 import GenresList from "../genres-list/genres-list";
 import FilmsList from "../films-list/films-list";
+import Header from "../header/header";
 import {filteredFilmsSelector, genresFilterSelector} from "../../store/selectors";
 
 const Main = (props) => {
   const {
     filteredFilms,
     filmsGenres,
-    mainFilm: {title, genre, year}
+    mainFilm: {title, genre, year},
+    authorizationStatus
   } = props;
-
+console.log(`main props`, props)
   return (
     <>
       <section className="movie-card">
@@ -25,26 +27,10 @@ const Main = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img
-                src="img/avatar.jpg"
-                alt="User avatar"
-                width="63"
-                height="63"
-              />
-            </div>
-          </div>
-        </header>
+        <Header
+          className={`movie-card__head`}
+          authorizationStatus={authorizationStatus}
+        />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -142,7 +128,8 @@ const mapStateToProps = (state) => {
   return {
     filmsList: state.films.filmsList,
     filteredFilms: filteredFilmsSelector(state.films),
-    filmsGenres: genresFilterSelector(state.films)
+    filmsGenres: genresFilterSelector(state.films),
+    authorizationStatus: state.users.authorizationStatus
   };
 };
 

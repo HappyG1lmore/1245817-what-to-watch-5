@@ -49,10 +49,11 @@ export const authorization = () => {
     });
 };
 
-export const sendUserData = ({login: email, password}) => {
+export const sendUserData = (credentials) => {
   const api = createAPI();
-  return api.post(`/login`, {email, password})
+  return api.post(`/login`, credentials)
     .then((res) => {
+      console.log(`res`, res);
       return res;
     })
     .catch((err) => {
