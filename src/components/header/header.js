@@ -10,11 +10,6 @@ const Header = (props) => {
     authorizationStatus,
   } = props;
 
-  Header.defaultProps = {
-    className: ``,
-    withUserBlock: true,
-  };
-
   return (
     <>
     <header className={`page-header ${className}`}>
@@ -54,6 +49,11 @@ Header.propTypes = {
   className: PropTypes.string,
   withUserBlock: PropTypes.bool,
   authorizationStatus: PropTypes.string,
+};
+
+Header.defaultProps = {
+  className: ``,
+  withUserBlock: true,
 };
 
 export default Header;

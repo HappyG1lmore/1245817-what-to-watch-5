@@ -10,10 +10,10 @@ export const withLoginState = (Component) => {
         userPassword: null
       };
 
-      this.handleFieldChange = this.handleFieldChange.bind(this);
+      this.onHandleFieldChange = this.onHandleFieldChange.bind(this);
     }
 
-    handleFieldChange(evt) {
+    onHandleFieldChange(evt) {
       const {name, value} = evt.target;
       this.setState({[name]: value});
     }
@@ -22,8 +22,9 @@ export const withLoginState = (Component) => {
       return (
         <Component
           {...this.props}
-          handleFieldChange = {this.handleFieldChange}
-          state = {this.state}
+          onHandleFieldChange = {this.onHandleFieldChange}
+          userEmail = {this.state.userEmail}
+          userPassword = {this.state.userPassword}
         />
       );
     }

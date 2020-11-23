@@ -9,17 +9,16 @@ import {Redirect} from "react-router-dom";
 
 const SignIn = (props) => {
   const {
-    handleFieldChange,
+    onHandleFieldChange,
     loginAction,
-    state,
+    userPassword,
+    userEmail,
     authorizationStatus
   } = props;
-  const password = state.userPassword;
-  const email = state.userEmail;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    loginAction(email, password);
+    loginAction(userEmail, userPassword);
   };
 
   if (authorizationStatus === `AUTH`) {
@@ -40,12 +39,12 @@ const SignIn = (props) => {
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="userEmail"
-                id="userEmail" onChange={handleFieldChange}/>
+                id="userEmail" onChange={onHandleFieldChange}/>
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
               <input className="sign-in__input" type="password" placeholder="Password" name="userPassword"
-                id="userPassword" onChange={handleFieldChange}/>
+                id="userPassword" onChange={onHandleFieldChange}/>
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
@@ -73,10 +72,11 @@ const SignIn = (props) => {
 };
 
 SignIn.propTypes = {
-  handleFieldChange: PropTypes.func,
+  onHandleFieldChange: PropTypes.func,
   loginAction: PropTypes.func,
-  state: PropTypes.object,
-  authorizationStatus: PropTypes.string
+  authorizationStatus: PropTypes.string,
+  userPassword: PropTypes.string,
+  userEmail: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {

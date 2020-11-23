@@ -10,24 +10,24 @@ export const withAddReviewState = (Component) => {
         reviewText: null
       };
 
-      this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleFieldChange = this.handleFieldChange.bind(this);
+      this.onHandleSubmit = this.onHandleSubmit.bind(this);
+      this.onHandleFieldChange = this.onHandleFieldChange.bind(this);
     }
 
-    handleFieldChange(evt) {
+    onHandleFieldChange(evt) {
       const {name, value} = evt.target;
       this.setState({[name]: value});
     }
 
-    handleSubmit(evt) {
+    onHandleSubmit(evt) {
       evt.preventDefault();
     }
 
     render() {
       return <Component
         {...this.props}
-        handleSubmit = {this.handleSubmit}
-        handleFieldChange = {this.handleFieldChange}
+        onHandleSubmit = {this.handleSubmit}
+        onHandleFieldChange = {this.onHandleFieldChange}
       />;
     }
   };

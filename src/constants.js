@@ -6,7 +6,7 @@ export const FilmPreviewSize = {
   HEIGHT: `175`
 };
 
-export const Error = {
+export const HttpCode = {
   UNAUTHORIZED: 401
 };
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import {API_TIMEOUT} from "./constants";
-import {Error} from "./constants";
+import {HttpCode} from "./constants";
 
 const createAPI = (onUnauthorized) => {
   const api = axios.create({
@@ -16,7 +16,7 @@ const createAPI = (onUnauthorized) => {
   const onFail = (err) =>{
     const {response} = err;
 
-    if (response.status === Error.UNAUTHORIZED) {
+    if (response.status === HttpCode.UNAUTHORIZED) {
       onUnauthorized();
       throw err;
     }
