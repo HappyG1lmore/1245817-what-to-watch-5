@@ -1,8 +1,7 @@
-import {AuthorizationStatus} from "../../constants";
-
 
 export const ActionType = {
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  GET_USER_AVATAR: `GET_USER_AVATAR`,
 };
 
 export const requireAuthorization = (status) => {
@@ -12,27 +11,11 @@ export const requireAuthorization = (status) => {
   };
 };
 
-export const checkAuth = () => {
-  return (dispatch, getState, api) => {
-    api.authorization()
-      .then(() => {
-        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-      })
-      .catch((err) => {
-        throw err;
-      });
+export const getUserAvatar = (url) => {
+  return {
+    type: ActionType.GET_USER_AVATAR,
+    payload: url,
   };
 };
 
-export const login = (email, password) => {
-  return (dispatch, getState, api) => {
-    api.sendUserData({email, password})
-      .then(() => {
-        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-      })
-      .catch((err) => {
-        throw err;
-      });
-  };
-};
 

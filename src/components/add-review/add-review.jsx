@@ -14,10 +14,8 @@ const AddReview = (props) => {
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src={film
-            ? film.background
-            : ``}
-          alt="The Grand Budapest Hotel"/>
+          <img src={film.background}
+            alt="The Grand Budapest Hotel"/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -28,9 +26,7 @@ const AddReview = (props) => {
               <li className="breadcrumbs__item">
                 <Link to={`/films/${params.id}`}
                   className="breadcrumbs__link">
-                  {film
-                    ? film.title
-                    : ``}
+                  {film.title}
                 </Link>
               </li>
               <li className="breadcrumbs__item">
@@ -41,10 +37,9 @@ const AddReview = (props) => {
         </Header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src={film
-            ? film.poster
-            : ``} alt="The Grand Budapest Hotel poster" width="218"
-          height="327"/>
+          <img src={film.poster}
+            alt={`${film.title}`} width="218"
+            height="327"/>
         </div>
       </div>
 

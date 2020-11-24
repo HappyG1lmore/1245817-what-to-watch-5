@@ -4,6 +4,7 @@ import {AuthorizationStatus} from "../../constants";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  userAvatar: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,8 +13,11 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         authorizationStatus: action.payload,
       });
+    case ActionType.GET_USER_AVATAR:
+      return extend(state, {
+        userAvatar: action.payload,
+      });
   }
-
   return state;
 };
 

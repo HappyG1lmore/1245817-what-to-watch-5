@@ -12,9 +12,8 @@ const Main = (props) => {
     filteredFilms,
     filmsGenres,
     mainFilm: {title, genre, year},
-    authorizationStatus
   } = props;
-console.log(`main props`, props)
+
   return (
     <>
       <section className="movie-card">
@@ -29,7 +28,6 @@ console.log(`main props`, props)
 
         <Header
           className={`movie-card__head`}
-          authorizationStatus={authorizationStatus}
         />
 
         <div className="movie-card__wrap">
@@ -129,7 +127,6 @@ const mapStateToProps = (state) => {
     filmsList: state.films.filmsList,
     filteredFilms: filteredFilmsSelector(state.films),
     filmsGenres: genresFilterSelector(state.films),
-    authorizationStatus: state.users.authorizationStatus
   };
 };
 

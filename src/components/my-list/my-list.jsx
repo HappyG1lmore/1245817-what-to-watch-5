@@ -28,14 +28,12 @@ const MyList = (props) => {
                 Grindelwald</a>
             </h3>
           </article>
-          {filmsList
-            ? filmsList.map((film) => (
-              <SmallMovieCard
-                key={film.id}
-                film={film}
-              />
-            ))
-            : ``}
+          {filmsList.map((film) => (
+            <SmallMovieCard
+              key={film.id}
+              film={film}
+            />
+          ))}
         </div>
       </section>
 
@@ -64,7 +62,7 @@ MyList.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    filmsList: state.filmsList,
+    filmsList: state.films.filmsList,
   };
 };
 

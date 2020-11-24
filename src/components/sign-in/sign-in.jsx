@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {withLoginState} from "../../hocs/with-login-state";
 import {Link} from "react-router-dom";
-import {login} from "../../store/users/actions";
+import {login} from "../../store/api-action";
 import {connect} from "react-redux";
 import Header from "../header/header";
 import {Redirect} from "react-router-dom";

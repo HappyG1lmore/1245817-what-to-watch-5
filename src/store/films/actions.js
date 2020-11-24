@@ -12,22 +12,10 @@ export const changeFilterGenre = (genre) => {
   };
 };
 
-const onFilmsFetchSuccess = (films) => {
+export const onFilmsFetchSuccess = (films) => {
   return {
     type: ActionType.FETCH_FILMS_SUCCESS,
     payload: adaptFilmsToClient(films)
-  };
-};
-
-export const fetchFilms = () => {
-  return (dispatch, getState, api) => {
-    api.getFilms()
-      .then((films) => {
-        dispatch(onFilmsFetchSuccess(films));
-      })
-      .catch(() => {
-        console.log(`catch`);
-      });
   };
 };
 

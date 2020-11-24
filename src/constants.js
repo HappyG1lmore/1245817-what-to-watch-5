@@ -18,3 +18,7 @@ export const AuthorizationStatus = {
 export const PLAY_PREVIEW_TIMEOUT = 1000;
 export const API_TIMEOUT = 5000;
 
+export const APIRoute = {
+  FILMS: `/films`,
+  LOGIN: `/login`,
+};
