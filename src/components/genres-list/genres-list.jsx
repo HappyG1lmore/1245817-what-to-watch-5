@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {changeFilterGenre} from "../../store/actions";
+import {changeFilterGenre} from "../../store/films/actions";
 
 const GenresList = (props) => {
   const {
@@ -47,7 +47,7 @@ GenresList.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    genre: state.genre
+    genre: state.films.genre
   };
 };
 

@@ -1,12 +1,11 @@
-import {extend} from "../utils";
+import {extend} from "../../utils";
 import {ActionType} from "./actions";
-import {ALL_GENRES} from "../constants";
-
+import {ALL_GENRES} from "../../constants";
 
 const initialState = {
   genre: ALL_GENRES,
   filmsList: [],
-  isFilmsFetching: true
+  isFilmsFetching: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,7 +21,6 @@ const reducer = (state = initialState, action) => {
         filmsList: action.payload,
       });
   }
-
   return state;
 };
 
