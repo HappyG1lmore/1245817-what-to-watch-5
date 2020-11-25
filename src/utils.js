@@ -75,4 +75,26 @@ export const adaptFilmsToClient = (films) => films.map((data) => ({
   director: data.director,
   starring: data.starring,
   runtime: data.run_time,
+  isFavorite: data.is_favorite,
 }));
+
+export const adaptFilmToClient = (data) => ({
+  id: data.id,
+  backgroundColor: data.background_color,
+  background: data.background_image,
+  poster: data.poster_image,
+  frame: data.preview_image,
+  title: data.name,
+  video: data.preview_video_link,
+  genre: data.genre,
+  year: String(data.released),
+  rating: data.rating,
+  ratingText: createRatingText(data.rating),
+  ratings: String(data.scores_count),
+  description: data.description,
+  director: data.director,
+  starring: data.starring,
+  runtime: data.run_time,
+  isFavorite: data.is_favorite,
+});
+

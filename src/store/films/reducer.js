@@ -6,6 +6,8 @@ const initialState = {
   genre: ALL_GENRES,
   filmsList: [],
   isFilmsFetching: true,
+  film: null,
+  comments: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +21,14 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isFilmsFetching: false,
         filmsList: action.payload,
+      });
+    case ActionType.FILM_INFO:
+      return extend(state, {
+        film: action.payload,
+      });
+    case ActionType.GET_COMMENTS:
+      return extend(state, {
+        comments: action.payload,
       });
   }
   return state;
