@@ -1,191 +1,206 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {filmsListPropTypes} from "../../common-prop-types";
 import PropTypes from "prop-types";
 import Header from "../header/header";
+import Tabs from "../tabs/tabs";
+import {getComments, getFilmInfo} from "../../store/api-action";
+import {clearFilmInfo} from "../../store/film/actions";
+import {clearComments} from "../../store/reviews/actions";
 
-const Film = (props) => {
-  const {
-    filmsList,
-    history,
-    match
-  } = props;
-  const {params, url} = match;
-  const film = filmsList.find((movie) => String(movie.id) === params.id);
+class Film extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    film ?
-      <React.Fragment>
-        <section className="movie-card movie-card--full">
-          <div className="movie-card__hero">
-            <div className="movie-card__bg">
-              <img src={`img/bg-the-grand-budapest-hotel.jpg`} alt="The Grand Budapest Hotel"/>
-            </div>
+  componentDidMount() {
+    const {
+      getFilmInformation,
+      getCommentsList,
+      match: {params: {id}}
+    } = this.props;
 
-            <h1 className="visually-hidden">WTW</h1>
+    getFilmInformation(id);
+    getCommentsList(id);
+  }
 
-            <Header className={`movie-card__head`}/>
+  componentWillUnmount() {
+    const {clearFilm, clearReviews} = this.props;
+    clearFilm();
+    clearReviews();
+  }
 
-            <div className="movie-card__wrap">
-              <div className="movie-card__desc">
-                <h2 className="movie-card__title">{film.title}</h2>
-                <p className="movie-card__meta">
-                  <span className="movie-card__genre">{film.genre[0]}</span>
-                  <span className="movie-card__year">{film.year}</span>
-                </p>
+  render() {
+    const {
+      film,
+      history,
+      match: {params, url},
+      authorizationStatus
+    } = this.props;
 
-                <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button"
-                    onClick={() => {
-                      history.push(`/player/${params.id}`);
-                    }}>
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"/>
-                    </svg>
-                    <span>Play</span>
-                  </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"/>
-                    </svg>
-                    <span>My list</span>
-                  </button>
-                  <Link to={`${url}/review`} className="btn movie-card__button">Add review</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="movie-card__wrap movie-card__translate-top">
-            <div className="movie-card__info">
-              <div className="movie-card__poster movie-card__poster--big">
-                <img src={`img/the-grand-budapest-hotel-poster.jpg`} alt="The Grand Budapest Hotel poster" width="218"
-                  height="327"/>
+    return (
+      film ?
+        <React.Fragment>
+          <section
+            className="movie-card movie-card--full"
+            style={{backgroundColor: `${film.backgroundColor}`}}
+          >
+            <div className="movie-card__hero">
+              <div className="movie-card__bg">
+                <img src={film.background} alt={film.title}/>
               </div>
 
-              <div className="movie-card__desc">
-                <nav className="movie-nav movie-card__nav">
-                  <ul className="movie-nav__list">
-                    <li className="movie-nav__item movie-nav__item--active">
-                      <a href="#" className="movie-nav__link">Overview</a>
-                    </li>
-                    <li className="movie-nav__item">
-                      <a href="#" className="movie-nav__link">Details</a>
-                    </li>
-                    <li className="movie-nav__item">
-                      <a href="#" className="movie-nav__link">Reviews</a>
-                    </li>
-                  </ul>
-                </nav>
+              <h1 className="visually-hidden">WTW</h1>
 
-                <div className="movie-rating">
-                  <div className="movie-rating__score">{film.rating}</div>
-                  <p className="movie-rating__meta">
-                    <span className="movie-rating__level">{film.ratingText}</span>
-                    <span className="movie-rating__count">{film.ratings} ratings</span>
+              <Header className={`movie-card__head`}/>
+
+              <div className="movie-card__wrap">
+                <div className="movie-card__desc">
+                  <h2 className="movie-card__title">{film.title}</h2>
+                  <p className="movie-card__meta">
+                    <span className="movie-card__genre">{film.genre}</span>
+                    <span className="movie-card__year">{film.year}</span>
                   </p>
-                </div>
 
-                <div className="movie-card__text">
-                  <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge
-                    Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave`s friend and protege.</p>
-
-                  <p>Gustave prides himself on providing first-class service to the hotel`s guests, including satisfying
-                    the
-                    sexual needs of the many elderly women who stay there. When one of Gustave`s lovers dies
-                    mysteriously,
-                    Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
-
-                  <p className="movie-card__director"><strong>Director: {film.director}</strong></p>
-                  <p className="movie-card__starring"><strong>{film.starring.join(`, `)}
-                  </strong></p>
+                  <div className="movie-card__buttons">
+                    <button className="btn btn--play movie-card__button" type="button"
+                      onClick={() => {
+                        history.push(`/player/${params.id}`);
+                      }}>
+                      <svg viewBox="0 0 19 19" width="19" height="19">
+                        <use xlinkHref="#play-s"/>
+                      </svg>
+                      <span>Play</span>
+                    </button>
+                    <button className="btn btn--list movie-card__button" type="button">
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#add"/>
+                      </svg>
+                      <span>My list</span>
+                    </button>
+                    {
+                      authorizationStatus === `AUTH`
+                      &&
+                      <Link to={`${url}/review`} className="btn movie-card__button">Add review</Link>
+                    }
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        <div className="page-content">
-          <section className="catalog catalog--like-this">
-            <h2 className="catalog__title">More like this</h2>
-
-            <div className="catalog__movies-list">
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src={`img/fantastic-beasts-the-crimes-of-grindelwald.jpg`}
-                    alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
+            <div className="movie-card__wrap movie-card__translate-top">
+              <div className="movie-card__info">
+                <div className="movie-card__poster movie-card__poster--big">
+                  <img
+                    src={film.poster}
+                    alt={film.title}
+                    width="218"
+                    height="327"
+                  />
                 </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href={`movie-page.html`}>
-                    Fantastic Beasts: The Crimes of Grindelwald
-                  </a>
-                </h3>
-              </article>
 
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src={`img/bohemian-rhapsody.jpg`} alt="Bohemian Rhapsody" width="280" height="175"/>
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-                </h3>
-              </article>
+                <Tabs film={film}/>
 
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src={`img/macbeth.jpg`} alt="Macbeth" width="280" height="175"/>
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-                </h3>
-              </article>
-
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src={`img/aviator.jpg`} alt="Aviator" width="280" height="175"/>
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-                </h3>
-              </article>
+              </div>
             </div>
           </section>
 
-          <footer className="page-footer">
-            <div className="logo">
-              <Link to={`/`} className="logo__link logo__link--light">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
+          <div className="page-content">
+            <section className="catalog catalog--like-this">
+              <h2 className="catalog__title">More like this</h2>
 
-            <div className="copyright">
-              <p>© 2019 What to watch Ltd.</p>
-            </div>
-          </footer>
-        </div>
-      </React.Fragment>
-      :
-      <h2>Film with url: app{url} not found</h2>
-  );
-};
+              <div className="catalog__movies-list">
+                <article className="small-movie-card catalog__movies-card">
+                  <div className="small-movie-card__image">
+                    <img src={`img/fantastic-beasts-the-crimes-of-grindelwald.jpg`}
+                      alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
+                  </div>
+                  <h3 className="small-movie-card__title">
+                    <a className="small-movie-card__link" href={`movie-page.html`}>
+                      Fantastic Beasts: The Crimes of Grindelwald
+                    </a>
+                  </h3>
+                </article>
+
+                <article className="small-movie-card catalog__movies-card">
+                  <div className="small-movie-card__image">
+                    <img src={`img/bohemian-rhapsody.jpg`} alt="Bohemian Rhapsody" width="280" height="175"/>
+                  </div>
+                  <h3 className="small-movie-card__title">
+                    <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
+                  </h3>
+                </article>
+
+                <article className="small-movie-card catalog__movies-card">
+                  <div className="small-movie-card__image">
+                    <img src={`img/macbeth.jpg`} alt="Macbeth" width="280" height="175"/>
+                  </div>
+                  <h3 className="small-movie-card__title">
+                    <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
+                  </h3>
+                </article>
+
+                <article className="small-movie-card catalog__movies-card">
+                  <div className="small-movie-card__image">
+                    <img src={`img/aviator.jpg`} alt="Aviator" width="280" height="175"/>
+                  </div>
+                  <h3 className="small-movie-card__title">
+                    <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
+                  </h3>
+                </article>
+              </div>
+            </section>
+
+            <footer className="page-footer">
+              <div className="logo">
+                <Link to={`/`} className="logo__link logo__link--light">
+                  <span className="logo__letter logo__letter--1">W</span>
+                  <span className="logo__letter logo__letter--2">T</span>
+                  <span className="logo__letter logo__letter--3">W</span>
+                </Link>
+              </div>
+
+              <div className="copyright">
+                <p>© 2019 What to watch Ltd.</p>
+              </div>
+            </footer>
+          </div>
+        </React.Fragment>
+        :
+        <h2>Film with url: app{url} not found</h2>
+    );
+  }
+}
 
 Film.propTypes = {
-  filmsList: filmsListPropTypes,
   history: PropTypes.object,
   match: PropTypes.object,
   params: PropTypes.object,
   url: PropTypes.string,
+  getFilmInformation: PropTypes.func,
+  film: PropTypes.object,
+  authorizationStatus: PropTypes.string,
+  clearFilm: PropTypes.func,
+  getCommentsList: PropTypes.func,
+  comments: PropTypes.array,
+  clearReviews: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
   return {
-    filmsList: state.films.filmsList
+    film: state.film.film,
+    authorizationStatus: state.users.authorizationStatus
+  };
+};
+
+const mapDispatchToProps = (dispath) => {
+  return {
+    getFilmInformation: (id) => dispath(getFilmInfo(id)),
+    getCommentsList: (id) => dispath(getComments(id)),
+    clearFilm: () => dispath(clearFilmInfo()),
+    clearReviews: () => dispath(clearComments())
   };
 };
 
 export {Film};
-export default connect(mapStateToProps)(Film);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Film);

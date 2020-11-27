@@ -9,6 +9,8 @@ import reducer from "./store/root-reducer";
 import {requireAuthorization} from "./store/users/actions";
 import {AuthorizationStatus} from "./constants";
 import {fetchFilms, checkAuth} from "./store/api-action";
+import {redirect} from "./store/middlewares/redirect";
+import {composeWithDevTools} from "redux-devtools-extension";
 
 const movie1 = {
   title: `The Grand Budapest Hotel`,
@@ -20,13 +22,14 @@ const api = createAPI(
     () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
 );
 
-const composeEnhancers = (typeof window !== `undefined` && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-
 export const store = createStore(
     reducer,
-    composeEnhancers(
-        applyMiddleware(thunk.withExtraArgument(api)))
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
+    )
 );
+
 
 Promise.all([
   store.dispatch(fetchFilms()),
@@ -35,7 +38,7 @@ Promise.all([
   .then(() => {
     ReactDom.render(
         <Provider store={store}>
-          <App mainFilm={movie1} />,
+          <App mainFilm={movie1} />
         </Provider>,
         document.querySelector(`#root`)
     );

@@ -43,7 +43,7 @@ const AddReview = (props) => {
         </div>
       </div>
 
-      <ReviewForm />
+      <ReviewForm id={params.id}/>
 
     </section>
 

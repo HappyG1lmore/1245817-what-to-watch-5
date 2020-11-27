@@ -58,7 +58,8 @@ const createRatingText = (rating) => {
   return ratingText;
 };
 
-export const adaptFilmsToClient = (films) => films.map((data) => ({
+
+export const adaptFilmToClient = (data) => ({
   id: data.id,
   backgroundColor: data.background_color,
   background: data.background_image,
@@ -75,4 +76,7 @@ export const adaptFilmsToClient = (films) => films.map((data) => ({
   director: data.director,
   starring: data.starring,
   runtime: data.run_time,
-}));
+  isFavorite: data.is_favorite,
+});
+
+export const adaptFilmsToClient = (films) => films.map(adaptFilmToClient);

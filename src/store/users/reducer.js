@@ -4,7 +4,7 @@ import {AuthorizationStatus} from "../../constants";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  userAvatar: null
+  userAvatar: null,
 };
 
 const reducer = (state = initialState, action) => {
