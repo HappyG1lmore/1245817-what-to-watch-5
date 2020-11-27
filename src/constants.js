@@ -36,3 +36,9 @@ export const REVIEWS_COLUMN_COUNT = 3;
 
 export const MINUTES_IN_HOUR = 60;
 
+export const REVIEWS_LENGTH = {
+  MIN: 50,
+  MAX: 400
+};
+
+

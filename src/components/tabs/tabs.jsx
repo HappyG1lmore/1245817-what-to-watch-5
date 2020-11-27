@@ -12,11 +12,11 @@ const Tabs = (props) => {
   const renderTab = () => {
     switch (activeTab) {
       case TabType.OVERVIEW:
-        return <OverviewTab film={film}/>;
+        return <OverviewTab film={film} />;
       case TabType.DETAILS:
-        return <DetailsTab film={film}/>;
+        return <DetailsTab film={film} />;
       case TabType.REVIEWS:
-        return <ReviewsTab film={film}/>;
+        return <ReviewsTab />;
     }
     return activeTab;
   };

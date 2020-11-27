@@ -26,3 +26,10 @@ export const routerPropTypes = {
   history: PropTypes.object,
   location: PropTypes.object
 };
+
+const commentPropTypes = PropTypes.shape({
+  rating: PropTypes.string,
+  comment: PropTypes.string
+});
+
+export const commentsPropTypes = PropTypes.arrayOf(commentPropTypes);

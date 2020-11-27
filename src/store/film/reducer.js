@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CLEAR_FILM_INFO:
       return extend(state, {
-        isFilmInfoFetching: false,
+        isFilmInfoFetching: true,
         film: null,
       });
   }

@@ -24,18 +24,17 @@ export const withAddReviewState = (Component) => {
 
     handleSubmit(evt) {
       evt.preventDefault();
-      const {loadReview, id} = this.props;
-      loadReview(
-          {rating: this.state.rating,
-            comment: this.state.reviewText},
-          id);
+      const {uploadReviewAction, id} = this.props;
+      const {rating, reviewText} = this.props;
+
+      uploadReviewAction({rating, comment: reviewText}, id);
     }
 
     render() {
       return <Component
         {...this.props}
         onHandleSubmit = {this.handleSubmit}
-        onHandleFieldChange = {this.handleFieldChange}
+        onFieldChange = {this.handleFieldChange}
         comment = {this.state.reviewText}
         rating = {this.state.rating}
       />;
@@ -43,13 +42,15 @@ export const withAddReviewState = (Component) => {
   }
 
   AddReview.propTypes = {
-    loadReview: PropTypes.func,
-    id: PropTypes.string
+    uploadReviewAction: PropTypes.func,
+    id: PropTypes.string,
+    rating: PropTypes.string,
+    reviewText: PropTypes.string,
   };
 
   const mapDispatchToProps = (dispatch) => {
     return {
-      loadReview: (review, id) => dispatch(uploadReview(review, id))
+      uploadReviewAction: (review, id) => dispatch(uploadReview(review, id))
     };
   };
 

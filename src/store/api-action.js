@@ -54,11 +54,9 @@ export const login = (email, password) => {
 
 export const uploadReview = (data, id) => (dispatch, getState, api) => {
   dispatch(uploadReviewStart());
-  console.log(`asdasdasd`, data, id);
   api.post(`${APIRoute.COMMENTS}/${id}`, data)
     .then(() => dispatch(uploadReviewComplete()))
-    .then(() => dispatch(redirectToRoute(`/films/${id}`)))
-    .catch((err) => dispatch(uploadReviewComplete(err)));
+    .then(() => dispatch(redirectToRoute(`/films/${id}`)));
 };
 
 
