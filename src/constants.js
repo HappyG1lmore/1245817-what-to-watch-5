@@ -33,3 +33,6 @@ export const TabType = {
 export const MAX_STARRING = 4;
 
 export const REVIEWS_COLUMN_COUNT = 3;
+
+export const MINUTES_IN_HOUR = 60;
+

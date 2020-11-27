@@ -4,7 +4,9 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Header from "../header/header";
 import Tabs from "../tabs/tabs";
-import {getFilmInfo} from "../../store/api-action";
+import {getComments, getFilmInfo} from "../../store/api-action";
+import {clearFilmInfo} from "../../store/film/actions";
+import {clearComments} from "../../store/reviews/actions";
 
 class Film extends PureComponent {
   constructor(props) {
@@ -14,23 +16,27 @@ class Film extends PureComponent {
   componentDidMount() {
     const {
       getFilmInformation,
-      match: {
-        params
-      }
+      getCommentsList,
+      match: {params: {id}}
     } = this.props;
-    const id = params.id;
 
     getFilmInformation(id);
+    getCommentsList(id);
+  }
+
+  componentWillUnmount() {
+    const {clearFilm, clearReviews} = this.props;
+    clearFilm();
+    clearReviews();
   }
 
   render() {
     const {
+      film,
       history,
-      match,
+      match: {params, url},
       authorizationStatus
     } = this.props;
-    const {params, url} = match;
-    const {film} = this.props;
 
     return (
       film ?
@@ -73,7 +79,8 @@ class Film extends PureComponent {
                       <span>My list</span>
                     </button>
                     {
-                      authorizationStatus === `AUTH` &&
+                      authorizationStatus === `AUTH`
+                      &&
                       <Link to={`${url}/review`} className="btn movie-card__button">Add review</Link>
                     }
                   </div>
@@ -84,8 +91,12 @@ class Film extends PureComponent {
             <div className="movie-card__wrap movie-card__translate-top">
               <div className="movie-card__info">
                 <div className="movie-card__poster movie-card__poster--big">
-                  <img src={film.poster} alt={film.title} width="218"
-                    height="327"/>
+                  <img
+                    src={film.poster}
+                    alt={film.title}
+                    width="218"
+                    height="327"
+                  />
                 </div>
 
                 <Tabs film={film}/>
@@ -168,13 +179,16 @@ Film.propTypes = {
   url: PropTypes.string,
   getFilmInformation: PropTypes.func,
   film: PropTypes.object,
-  authorizationStatus: PropTypes.string
+  authorizationStatus: PropTypes.string,
+  clearFilm: PropTypes.func,
+  getCommentsList: PropTypes.func,
+  comments: PropTypes.array,
+  clearReviews: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
   return {
-    filmsList: state.films.filmsList,
-    film: state.films.film,
+    film: state.film.film,
     authorizationStatus: state.users.authorizationStatus
   };
 };
@@ -182,9 +196,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispath) => {
   return {
     getFilmInformation: (id) => dispath(getFilmInfo(id)),
+    getCommentsList: (id) => dispath(getComments(id)),
+    clearFilm: () => dispath(clearFilmInfo()),
+    clearReviews: () => dispath(clearComments())
   };
 };
 
 export {Film};
 export default connect(mapStateToProps, mapDispatchToProps)(Film);
-

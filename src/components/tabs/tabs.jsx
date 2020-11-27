@@ -31,13 +31,10 @@ const Tabs = (props) => {
                 key={tab}
                 className={
                   `movie-nav__item
-              ${tab === props.activeTab
-                    ? `movie-nav__item--active`
-                    : ``
-                  }`
-                }
+                   ${tab === props.activeTab && `movie-nav__item--active`}
+               `}
               >
-                <a
+                <a href={`#`}
                   className="movie-nav__link"
                   onClick={(evt) => {
                     evt.preventDefault();

@@ -1,9 +1,15 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
-
+import {MINUTES_IN_HOUR} from "../../constants"
 
 export const DetailsTab = (props) => {
   const {film} = props;
+
+  const prettifyRuntime = (runtime) => {
+    const hours = Math.floor((runtime / MINUTES_IN_HOUR));
+    const minutes = runtime % MINUTES_IN_HOUR;
+    return `${hours}h ${minutes}m`;
+  };
 
   return (
     <>
@@ -20,7 +26,7 @@ export const DetailsTab = (props) => {
                 const isLast = idx === film.starring.length - 1;
                 return (
                   <Fragment key={actor}>
-                    {actor}{!isLast && < br/>}
+                    {actor}{!isLast && <>, < br/></>}
                   </Fragment>
                 );
               })}
@@ -32,7 +38,7 @@ export const DetailsTab = (props) => {
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Run Time</strong>
             <span
-              className="movie-card__details-value">{`${Math.floor((film.runtime / 60))}h ${(film.runtime % 60)}m`}</span>
+              className="movie-card__details-value">{prettifyRuntime(film.runtime)}</span>
           </p>
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Genre</strong>

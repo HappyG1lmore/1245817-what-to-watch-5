@@ -1,9 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {withAddReviewState} from "../../hocs/with-add-review-state";
+import {connect} from "react-redux";
 
 const ReviewForm = (props) => {
-  const {onHandleSubmit, onHandleFieldChange} = props;
+  const {
+    onHandleSubmit,
+    onHandleFieldChange,
+    isUploading,
+    comment,
+    rating,
+  } = props;
+
+  const isFormValid = (() => (
+    Boolean(rating) && comment.length > 50 && comment.length < 400
+  ))();
+
   return (
     <div className="add-review">
       <form className="add-review__form" onSubmit={onHandleSubmit}>
@@ -34,7 +46,14 @@ const ReviewForm = (props) => {
           <textarea className="add-review__textarea" name="reviewText" id="review-text"
             placeholder="Review text" onChange={onHandleFieldChange}/>
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit">Post</button>
+            <button
+              className="add-review__btn"
+
+              disabled={isUploading || !isFormValid}
+              type="submit"
+            >
+              Post
+            </button>
           </div>
 
         </div>
@@ -46,6 +65,16 @@ const ReviewForm = (props) => {
 ReviewForm.propTypes = {
   onHandleSubmit: PropTypes.func,
   onHandleFieldChange: PropTypes.func,
+  isUploading: PropTypes.bool,
+  comment: PropTypes.string,
+  rating: PropTypes.string,
 };
 
-export default withAddReviewState(ReviewForm);
+const mapStateToProps = (state) => {
+  return {
+    isUploading: state.userReview.isUploading
+  };
+};
+
+export {ReviewForm};
+export default withAddReviewState(connect(mapStateToProps)(ReviewForm));

@@ -1,26 +1,26 @@
 import {extend} from "../../utils";
 import {ActionType} from "./actions";
-import {ALL_GENRES} from "../../constants";
 
 const initialState = {
-  genre: ALL_GENRES,
-  filmsList: [],
-  isFilmsFetching: true,
+  isCommentsFetching: true,
+  comments: null,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_FILTER_GENRE:
+    case ActionType.GET_COMMENTS:
       return extend(state, {
-        genre: action.payload
+        isCommentsFetching: false,
+        comments: action.payload,
       });
-    case ActionType.FETCH_FILMS_SUCCESS:
+    case ActionType.CLEAR_COMMENTS:
       return extend(state, {
-        isFilmsFetching: false,
-        filmsList: action.payload,
+        isCommentsFetching: true,
+        comments: null,
       });
   }
   return state;
 };
 
 export {reducer};
+

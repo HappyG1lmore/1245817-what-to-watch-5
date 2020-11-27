@@ -1,34 +1,57 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import {uploadReview} from "../store/api-action";
 
 export const withAddReviewState = (Component) => {
-  return class AddReview extends PureComponent {
+  class AddReview extends PureComponent {
     constructor(props) {
       super(props);
 
       this.state = {
-        rating: null,
-        reviewText: null
+        rating: ``,
+        reviewText: ``
       };
 
-      this.onHandleSubmit = this.onHandleSubmit.bind(this);
-      this.onHandleFieldChange = this.onHandleFieldChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleFieldChange = this.handleFieldChange.bind(this);
     }
 
-    onHandleFieldChange(evt) {
+    handleFieldChange(evt) {
       const {name, value} = evt.target;
       this.setState({[name]: value});
     }
 
-    onHandleSubmit(evt) {
+    handleSubmit(evt) {
       evt.preventDefault();
+      const {loadReview, id} = this.props;
+      loadReview(
+          {rating: this.state.rating,
+            comment: this.state.reviewText},
+          id);
     }
 
     render() {
       return <Component
         {...this.props}
         onHandleSubmit = {this.handleSubmit}
-        onHandleFieldChange = {this.onHandleFieldChange}
+        onHandleFieldChange = {this.handleFieldChange}
+        comment = {this.state.reviewText}
+        rating = {this.state.rating}
       />;
     }
+  }
+
+  AddReview.propTypes = {
+    loadReview: PropTypes.func,
+    id: PropTypes.string
   };
+
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      loadReview: (review, id) => dispatch(uploadReview(review, id))
+    };
+  };
+
+  return connect(null, mapDispatchToProps)(AddReview);
 };

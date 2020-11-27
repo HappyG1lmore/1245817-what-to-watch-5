@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import {TabType} from "../constants";
 
 export const withActiveTabState = (Component) => {
   return class ActiveTab extends PureComponent {
@@ -6,7 +7,7 @@ export const withActiveTabState = (Component) => {
       super(props);
 
       this.state = {
-        activeTab: `Overview`,
+        activeTab: TabType.OVERVIEW,
       };
 
       this.onTabChange = this.onTabChange.bind(this);
