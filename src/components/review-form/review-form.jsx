@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {withAddReviewState} from "../../hocs/with-add-review-state";
 import {connect} from "react-redux";
-import {REVIEW_LENGTH} from "../../constants";
+import {ReviewsLength} from "../../constants";
 
 const ReviewForm = (props) => {
   const {
@@ -14,7 +14,7 @@ const ReviewForm = (props) => {
   } = props;
 
   const isFormValid = (() => (
-    Boolean(rating) && comment.length > REVIEW_LENGTH.MIN && comment.length < REVIEW_LENGTH.MAX
+    Boolean(rating) && comment.length > ReviewsLength.MIN && comment.length < ReviewsLength.MAX
   ))();
 
   return (

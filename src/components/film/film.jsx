@@ -27,10 +27,15 @@ class Film extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {match: {params: {id: prevId}}} = prevProps;
-    const {match: {params: {id}}, getFilmInformation} = this.props
+    const {
+      match: {params: {id}},
+      getFilmInformation,
+      getCommentsList
+    } = this.props;
 
     if (prevId !== id) {
       getFilmInformation(id);
+      getCommentsList(id);
     }
   }
 

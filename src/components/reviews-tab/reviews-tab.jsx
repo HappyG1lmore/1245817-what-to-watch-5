@@ -49,7 +49,11 @@ ReviewsTab.propTypes = {
         comment: PropTypes.string,
         date: PropTypes.string,
         id: PropTypes.number,
-        rating: PropTypes.number
+        rating: PropTypes.number,
+        user: PropTypes.shape({
+          id: PropTypes.number,
+          name: PropTypes.string,
+        })
       }))
 };
 
