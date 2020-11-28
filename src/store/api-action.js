@@ -8,7 +8,7 @@ import {uploadReviewStart, uploadReviewComplete, redirectToRoute} from "./userRe
 
 export const fetchFilms = () => {
   return (dispatch, getState, api) => {
-    api.get(APIRoute.FILMS)
+    return api.get(APIRoute.FILMS)
       .then((res) => {
         dispatch(onFilmsFetchSuccess(res.data));
       });
@@ -17,7 +17,7 @@ export const fetchFilms = () => {
 
 export const getFilmInfo = (id) => {
   return (dispatch, getState, api) => {
-    api.get(`${APIRoute.FILMS}/${id}`)
+    return api.get(`${APIRoute.FILMS}/${id}`)
       .then((res) => {
         dispatch(onFilmInfoFetchSuccess(res.data));
       });
@@ -26,7 +26,7 @@ export const getFilmInfo = (id) => {
 
 export const getComments = (id) => {
   return (dispatch, getState, api) => {
-    api.get(`${APIRoute.COMMENTS}/${id}`)
+    return api.get(`${APIRoute.COMMENTS}/${id}`)
       .then((res) => {
         dispatch(onCommentsFetchSuccess(res.data));
       });
@@ -35,7 +35,7 @@ export const getComments = (id) => {
 
 export const checkAuth = () => {
   return (dispatch, getState, api) => {
-    api.get(APIRoute.LOGIN)
+    return api.get(APIRoute.LOGIN)
       .then((res) => {
         dispatch(requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(getUserAvatar(res.data.avatar_url));
@@ -45,7 +45,7 @@ export const checkAuth = () => {
 
 export const login = (email, password) => {
   return (dispatch, getState, api) => {
-    api.post(APIRoute.LOGIN, {email, password})
+    return api.post(APIRoute.LOGIN, {email, password})
       .then(() => {
         dispatch(requireAuthorization(AuthorizationStatus.AUTH));
       });
@@ -54,7 +54,7 @@ export const login = (email, password) => {
 
 export const uploadReview = (data, id) => (dispatch, getState, api) => {
   dispatch(uploadReviewStart());
-  api.post(`${APIRoute.COMMENTS}/${id}`, data)
+  return api.post(`${APIRoute.COMMENTS}/${id}`, data)
     .then(() => dispatch(uploadReviewComplete()))
     .then(() => dispatch(redirectToRoute(`/films/${id}`)));
 };

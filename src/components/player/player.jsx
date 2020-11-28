@@ -1,31 +1,90 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import moment from "moment";
+import browserHistory from '../../browser-history';
+import {withFilmPlayer} from '../../hocs/with-film-player';
+import {secToDate} from "../../utils"
 
-const Player = () => {
+const PlayIcon = () => (
+  <>
+    <svg viewBox="0 0 19 19" width="19" height="19">
+      <use xlinkHref="#play-s"/>
+    </svg>
+    <span>Play</span>
+  </>
+);
+
+const PauseIcon = () => (
+  <>
+    <svg viewBox="0 0 14 21" width="14" height="21">
+      <use xlinkHref="#pause" />
+    </svg>
+    <span>Pause</span>
+  </>
+);
+
+const Player = (props) => {
+  const {
+    film,
+    playbackActive,
+    player,
+    progress,
+    timeLeft,
+    onFullscreenToggle,
+    onPlaybackToggle,
+  } = props;
+
+  const prettyTimeLeft = moment(secToDate(timeLeft)).format(`HH:mm:ss`);
+
+  const handleExitBtnClick = () => browserHistory.push(`/films/${film.id}`);
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"/>
+      {player}
 
-      <button type="button" className="player__exit">Exit</button>
+      <button
+        className="player__exit"
+        type="button"
+        onClick={handleExitBtnClick}
+      >
+        Exit
+      </button>
 
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"/>
-            <div className="player__toggler" style={{left: `30%`}}>Toggler</div>
+            <progress
+              className="player__progress"
+              value={progress}
+              max="100"
+            />
+            <div
+              className="player__toggler"
+              style={{left: `${progress}%`}}
+            >
+              Toggler
+            </div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">
+            {prettyTimeLeft}
+          </div>
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play">
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"/>
-            </svg>
-            <span>Play</span>
+          <button
+            type="button"
+            className="player__play"
+            onClick={onPlaybackToggle}
+          >
+            {playbackActive ? <PauseIcon /> : <PlayIcon />}
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{film.title}</div>
 
-          <button type="button" className="player__full-screen">
+          <button
+            type="button"
+            className="player__full-screen"
+            onClick={onFullscreenToggle}
+          >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"/>
             </svg>
@@ -37,4 +96,17 @@ const Player = () => {
   );
 };
 
-export default Player;
+Player.propTypes = {
+  film: PropTypes.object,
+  playbackActive: PropTypes.bool.isRequired,
+  progress: PropTypes.number.isRequired,
+  timeLeft: PropTypes.number.isRequired,
+  player: PropTypes.element.isRequired,
+  onPlaybackToggle: PropTypes.func.isRequired,
+  onFullscreenToggle: PropTypes.func.isRequired,
+};
+
+const WrappedPlayer = withFilmPlayer(Player);
+
+export {Player};
+export default WrappedPlayer;

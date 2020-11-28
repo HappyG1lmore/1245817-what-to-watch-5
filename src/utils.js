@@ -80,3 +80,9 @@ export const adaptFilmToClient = (data) => ({
 });
 
 export const adaptFilmsToClient = (films) => films.map(adaptFilmToClient);
+
+export const secToDate = (secs) => {
+  const date = new Date(1970, 0, 1);
+  date.setSeconds(secs);
+  return date;
+};
