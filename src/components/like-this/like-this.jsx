@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {filmsListPropTypes} from "../../common-prop-types";
-import {MAX_AMOUNT_SIMILAR_FILM} from "../../constants";
+import {MAX_AMOUNT_SIMILAR_FILMS} from "../../constants";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
 
 const LikeThis = (props) => {
@@ -11,7 +11,7 @@ const LikeThis = (props) => {
     .filter((film) => {
       return (film.genre === genre) && (film.id !== id);
     })
-    .slice(0, MAX_AMOUNT_SIMILAR_FILM);
+    .slice(0, MAX_AMOUNT_SIMILAR_FILMS);
 
   return (
     <section className="catalog catalog--like-this">

@@ -5,110 +5,134 @@ import {connect} from "react-redux";
 import GenresList from "../genres-list/genres-list";
 import FilmsList from "../films-list/films-list";
 import Header from "../header/header";
+import MoreFilmsButton from "../more-films-button/more-films-button";
 import {filteredFilmsSelector, genresFilterSelector} from "../../store/selectors";
+import {MAX_AMOUNT_FILMS_PER_STEP} from "../../constants";
 
-const Main = (props) => {
-  const {
-    filteredFilms,
-    filmsGenres,
-    mainFilm: {title, genre, year},
-  } = props;
+class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filmsToRender: MAX_AMOUNT_FILMS_PER_STEP,
+    };
+    this.handleClickBtnShowMore = this.handleClickBtnShowMore.bind(this);
+  }
 
-  return (
-    <>
-      <section className="movie-card">
-        <div className="movie-card__bg">
-          <img
-            src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="The Grand Budapest Hotel"
+  handleClickBtnShowMore() {
+    const filmsRendered = this.state.filmsToRender;
+    const filmsToRender = filmsRendered + MAX_AMOUNT_FILMS_PER_STEP;
+    this.setState({filmsToRender});
+  }
+
+  render() {
+    const {
+      filteredFilms,
+      filmsGenres,
+      mainFilm: {title, genre, year},
+    } = this.props;
+
+    const amountFilmsForRender = this.state.filmsToRender;
+    const filmsToRender = filteredFilms.slice(0, amountFilmsForRender);
+    const renderBtnShowMore = amountFilmsForRender < filteredFilms.length;
+
+    return (
+      <>
+        <section className="movie-card">
+          <div className="movie-card__bg">
+            <img
+              src="img/bg-the-grand-budapest-hotel.jpg"
+              alt="The Grand Budapest Hotel"
+            />
+          </div>
+
+          <h1 className="visually-hidden">WTW</h1>
+
+          <Header
+            className={`movie-card__head`}
           />
-        </div>
 
-        <h1 className="visually-hidden">WTW</h1>
+          <div className="movie-card__wrap">
+            <div className="movie-card__info">
+              <div className="movie-card__poster">
+                <img
+                  src="img/the-grand-budapest-hotel-poster.jpg"
+                  alt="The Grand Budapest Hotel poster"
+                  width="218"
+                  height="327"
+                />
+              </div>
 
-        <Header
-          className={`movie-card__head`}
-        />
+              <div className="movie-card__desc">
+                <h2 className="movie-card__title">{title}</h2>
+                <p className="movie-card__meta">
+                  <span className="movie-card__genre">{genre}</span>
+                  <span className="movie-card__year">{year}</span>
+                </p>
 
-        <div className="movie-card__wrap">
-          <div className="movie-card__info">
-            <div className="movie-card__poster">
-              <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
-                width="218"
-                height="327"
-              />
-            </div>
-
-            <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
-              <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{year}</span>
-              </p>
-
-              <div className="movie-card__buttons">
-                <button
-                  className="btn btn--play movie-card__button"
-                  type="button"
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s" />
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button
-                  className="btn btn--list movie-card__button"
-                  type="button"
-                >
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add" />
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <div className="movie-card__buttons">
+                  <button
+                    className="btn btn--play movie-card__button"
+                    type="button"
+                  >
+                    <svg viewBox="0 0 19 19" width="19" height="19">
+                      <use xlinkHref="#play-s"/>
+                    </svg>
+                    <span>Play</span>
+                  </button>
+                  <button
+                    className="btn btn--list movie-card__button"
+                    type="button"
+                  >
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"/>
+                    </svg>
+                    <span>My list</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <GenresList filmGenres={filmsGenres} />
-          </ul>
-
-          <div className="catalog__movies-list">
-            <FilmsList filmsList={filteredFilms}/>
-          </div>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <div className="page-content">
+          <section className="catalog">
+            <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
-      </div>
-    </>
-  );
-};
+            <ul className="catalog__genres-list">
+              <GenresList filmGenres={filmsGenres}/>
+            </ul>
+
+            <div className="catalog__movies-list">
+              <FilmsList filmsList={filmsToRender}/>
+            </div>
+
+            {
+              renderBtnShowMore
+              &&
+              <MoreFilmsButton
+                handleClick={this.handleClickBtnShowMore}
+              />}
+          </section>
+
+          <footer className="page-footer">
+            <div className="logo">
+              <a className="logo__link logo__link--light">
+                <span className="logo__letter logo__letter--1">W</span>
+                <span className="logo__letter logo__letter--2">T</span>
+                <span className="logo__letter logo__letter--3">W</span>
+              </a>
+            </div>
+
+            <div className="copyright">
+              <p>© 2019 What to watch Ltd.</p>
+            </div>
+          </footer>
+        </div>
+      </>
+    );
+  }
+}
+
 
 Main.propTypes = {
   mainFilm: PropTypes.shape({
