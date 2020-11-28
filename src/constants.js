@@ -41,5 +41,6 @@ export const ReviewsLength = {
   MAX: 400
 };
 
-export const MAX_AMOUNT_SIMILAR_FILM = 4;
+export const MAX_AMOUNT_FILMS_PER_STEP = 8;
+export const MAX_AMOUNT_SIMILAR_FILMS = 4;
 
