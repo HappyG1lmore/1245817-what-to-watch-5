@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {REVIEWS_COLUMN_COUNT} from "../../constants";
 import moment from "moment";
-import {commentsPropTypes} from "../../common-prop-types";
+import PropTypes from "prop-types";
 
 const ReviewsTab = (props) => {
 
@@ -44,7 +44,17 @@ const ReviewsTab = (props) => {
 
 
 ReviewsTab.propTypes = {
-  comments: commentsPropTypes,
+  comments: PropTypes.arrayOf(
+      PropTypes.shape({
+        comment: PropTypes.string,
+        date: PropTypes.string,
+        id: PropTypes.number,
+        rating: PropTypes.number,
+        user: PropTypes.shape({
+          id: PropTypes.number,
+          name: PropTypes.string,
+        })
+      }))
 };
 
 const mapStateToProps = (state) => {
