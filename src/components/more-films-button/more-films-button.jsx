@@ -2,11 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const MoreFilmsButton = (props) => {
-  const {handleClick} = props;
+  const {onClick, isVisible} = props;
 
   return (
+    isVisible &&
     <div className="catalog__more">
-      <button className="catalog__button" type="button" onClick={handleClick}>
+      <button className="catalog__button" type="button" onClick={onClick}>
         Show more
       </button>
     </div>
@@ -14,7 +15,8 @@ const MoreFilmsButton = (props) => {
 };
 
 MoreFilmsButton.propTypes = {
-  handleClick: PropTypes.func
+  onClick: PropTypes.func,
+  isVisible: PropTypes.bool
 };
 
 export default MoreFilmsButton;

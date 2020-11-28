@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {filmsListPropTypes} from "../../common-prop-types";
 import {connect} from "react-redux";
@@ -9,19 +9,27 @@ import MoreFilmsButton from "../more-films-button/more-films-button";
 import {filteredFilmsSelector, genresFilterSelector} from "../../store/selectors";
 import {MAX_AMOUNT_FILMS_PER_STEP} from "../../constants";
 
-class Main extends React.Component {
+class Main extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      filmsToRender: MAX_AMOUNT_FILMS_PER_STEP,
+      amountFilmsForRender: MAX_AMOUNT_FILMS_PER_STEP,
     };
     this.handleClickBtnShowMore = this.handleClickBtnShowMore.bind(this);
   }
 
   handleClickBtnShowMore() {
-    const filmsRendered = this.state.filmsToRender;
-    const filmsToRender = filmsRendered + MAX_AMOUNT_FILMS_PER_STEP;
-    this.setState({filmsToRender});
+    let {amountFilmsForRender} = this.state;
+    amountFilmsForRender += MAX_AMOUNT_FILMS_PER_STEP;
+    this.setState({amountFilmsForRender});
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.filteredFilms !== this.props.filteredFilms) {
+      this.setState({
+        amountFilmsForRender: MAX_AMOUNT_FILMS_PER_STEP
+      });
+    }
   }
 
   render() {
@@ -31,9 +39,9 @@ class Main extends React.Component {
       mainFilm: {title, genre, year},
     } = this.props;
 
-    const amountFilmsForRender = this.state.filmsToRender;
+    const {amountFilmsForRender} = this.state;
     const filmsToRender = filteredFilms.slice(0, amountFilmsForRender);
-    const renderBtnShowMore = amountFilmsForRender < filteredFilms.length;
+    const isShowMoreVisible = amountFilmsForRender < filteredFilms.length;
 
     return (
       <>
@@ -106,12 +114,11 @@ class Main extends React.Component {
               <FilmsList filmsList={filmsToRender}/>
             </div>
 
-            {
-              renderBtnShowMore
-              &&
-              <MoreFilmsButton
-                handleClick={this.handleClickBtnShowMore}
-              />}
+            <MoreFilmsButton
+              onClick={this.handleClickBtnShowMore}
+              isVisible={isShowMoreVisible}
+            />
+
           </section>
 
           <footer className="page-footer">

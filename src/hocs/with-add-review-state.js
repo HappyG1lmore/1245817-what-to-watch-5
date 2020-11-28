@@ -10,7 +10,7 @@ export const withAddReviewState = (Component) => {
 
       this.state = {
         rating: ``,
-        reviewText: ``
+        reviewText: ``,
       };
 
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +25,7 @@ export const withAddReviewState = (Component) => {
     handleSubmit(evt) {
       evt.preventDefault();
       const {uploadReviewAction, id} = this.props;
-      const {rating, reviewText} = this.props;
+      const {rating, reviewText} = this.state;
 
       uploadReviewAction({rating, comment: reviewText}, id);
     }
