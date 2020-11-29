@@ -4,6 +4,7 @@ import {ActionType} from "./actions";
 const initialState = {
   isFilmInfoFetching: true,
   film: null,
+  promoFilm: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +18,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isFilmInfoFetching: true,
         film: null,
+      });
+    case ActionType.FETCH_FILM_PROMO_SUCCESS:
+      return extend(state, {
+        promoFilm: action.payload,
       });
   }
   return state;

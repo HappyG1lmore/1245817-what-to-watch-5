@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import moment from "moment";
 import browserHistory from '../../browser-history';
 import {withFilmPlayer} from '../../hocs/with-film-player';
-import {secToDate} from "../../utils"
+import {secToDate} from "../../utils";
+import {filmPropTypes} from "../../common-prop-types";
 
 const PlayIcon = () => (
   <>
@@ -97,7 +98,7 @@ const Player = (props) => {
 };
 
 Player.propTypes = {
-  film: PropTypes.object,
+  film: filmPropTypes,
   playbackActive: PropTypes.bool.isRequired,
   progress: PropTypes.number.isRequired,
   timeLeft: PropTypes.number.isRequired,

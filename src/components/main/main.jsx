@@ -8,6 +8,7 @@ import Header from "../header/header";
 import MoreFilmsButton from "../more-films-button/more-films-button";
 import {filteredFilmsSelector, genresFilterSelector} from "../../store/selectors";
 import {MAX_AMOUNT_FILMS_PER_STEP} from "../../constants";
+import {filmPropTypes} from "../../common-prop-types";
 
 class Main extends PureComponent {
   constructor(props) {
@@ -36,7 +37,7 @@ class Main extends PureComponent {
     const {
       filteredFilms,
       filmsGenres,
-      mainFilm: {title, genre, year},
+      mainFilm,
     } = this.props;
 
     const {amountFilmsForRender} = this.state;
@@ -48,8 +49,8 @@ class Main extends PureComponent {
         <section className="movie-card">
           <div className="movie-card__bg">
             <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel"
+              src={mainFilm.background}
+              alt={mainFilm.title}
             />
           </div>
 
@@ -63,7 +64,7 @@ class Main extends PureComponent {
             <div className="movie-card__info">
               <div className="movie-card__poster">
                 <img
-                  src="img/the-grand-budapest-hotel-poster.jpg"
+                  src={mainFilm.poster}
                   alt="The Grand Budapest Hotel poster"
                   width="218"
                   height="327"
@@ -71,10 +72,10 @@ class Main extends PureComponent {
               </div>
 
               <div className="movie-card__desc">
-                <h2 className="movie-card__title">{title}</h2>
+                <h2 className="movie-card__title">{mainFilm.title}</h2>
                 <p className="movie-card__meta">
-                  <span className="movie-card__genre">{genre}</span>
-                  <span className="movie-card__year">{year}</span>
+                  <span className="movie-card__genre">{mainFilm.genre}</span>
+                  <span className="movie-card__year">{mainFilm.year}</span>
                 </p>
 
                 <div className="movie-card__buttons">
@@ -140,13 +141,8 @@ class Main extends PureComponent {
   }
 }
 
-
 Main.propTypes = {
-  mainFilm: PropTypes.shape({
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.string
-  }),
+  mainFilm: filmPropTypes,
   filmsList: filmsListPropTypes,
   filteredFilms: filmsListPropTypes,
   isFilmsFetching: PropTypes.bool,
@@ -158,6 +154,7 @@ const mapStateToProps = (state) => {
     filmsList: state.films.filmsList,
     filteredFilms: filteredFilmsSelector(state.films),
     filmsGenres: genresFilterSelector(state.films),
+    mainFilm: state.film.promoFilm
   };
 };
 

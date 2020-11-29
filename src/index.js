@@ -8,15 +8,9 @@ import {createAPI} from "./services/api";
 import reducer from "./store/root-reducer";
 import {requireAuthorization} from "./store/users/actions";
 import {AuthorizationStatus} from "./constants";
-import {fetchFilms, checkAuth} from "./store/api-action";
+import {fetchFilms, checkAuth, getPromoFilm} from "./store/api-action";
 import {redirect} from "./store/middlewares/redirect";
 import {composeWithDevTools} from "redux-devtools-extension";
-
-const movie1 = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  year: `2014`
-};
 
 const api = createAPI(
     () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
@@ -33,12 +27,13 @@ export const store = createStore(
 
 Promise.all([
   store.dispatch(fetchFilms()),
+  store.dispatch(getPromoFilm()),
   store.dispatch(checkAuth()),
 ])
   .then(() => {
     ReactDom.render(
         <Provider store={store}>
-          <App mainFilm={movie1} />
+          <App />
         </Provider>,
         document.querySelector(`#root`)
     );

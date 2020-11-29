@@ -1,8 +1,8 @@
 import {AuthorizationStatus} from "../constants";
 import {requireAuthorization, getUserAvatar} from "./users/actions";
 import {APIRoute} from "../constants";
-import {onFilmsFetchSuccess} from "./films/actions";
-import {onFilmInfoFetchSuccess} from "./film/actions";
+import {onFilmsFetchSuccess, onFavoriteFilmsFetchSuccess} from "./films/actions";
+import {onFilmInfoFetchSuccess, onFilmPromoFetchSuccess} from "./film/actions";
 import {onCommentsFetchSuccess} from "./reviews/actions";
 import {uploadReviewStart, uploadReviewComplete, redirectToRoute} from "./userReview/actions";
 
@@ -15,11 +15,29 @@ export const fetchFilms = () => {
   };
 };
 
+export const fetchFavoriteFilms = () => {
+  return (dispatch, getState, api) => {
+    return api.get(APIRoute.FAVORITE)
+      .then((res) => {
+        dispatch(onFavoriteFilmsFetchSuccess(res.data));
+      });
+  };
+};
+
 export const getFilmInfo = (id) => {
   return (dispatch, getState, api) => {
     return api.get(`${APIRoute.FILMS}/${id}`)
       .then((res) => {
         dispatch(onFilmInfoFetchSuccess(res.data));
+      });
+  };
+};
+
+export const getPromoFilm = () => {
+  return (dispatch, getState, api) => {
+    return api.get(`${APIRoute.FILMS}/promo`)
+      .then((res) => {
+        dispatch(onFilmPromoFetchSuccess(res.data));
       });
   };
 };

@@ -10,14 +10,12 @@ import AddReview from "./../add-review/add-review";
 import Player from "./../player/player";
 import browserHistory from "../../browser-history";
 
-const App = (props) => {
-
-  const {mainFilm} = props;
+const App = () => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/" render={() => (
-          <Main mainFilm={mainFilm} />
+          <Main />
         )}/>
         <Route exact path="/login"> <SignIn/> </Route>
         <PrivateRoute
@@ -32,7 +30,6 @@ const App = (props) => {
           path={`/films/:id/review`}
           render={(routerProps) => <AddReview {...routerProps} />}
         />
-
       </Switch>
     </BrowserRouter>
   );

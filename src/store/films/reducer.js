@@ -19,6 +19,11 @@ const reducer = (state = initialState, action) => {
         isFilmsFetching: false,
         filmsList: action.payload,
       });
+    case ActionType.FETCH_FAVORITE_FILMS_SUCCESS:
+      return extend(state, {
+        isFilmsFetching: false,
+        filmsList: action.payload,
+      });
   }
   return state;
 };
