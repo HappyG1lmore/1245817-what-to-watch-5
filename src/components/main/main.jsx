@@ -40,6 +40,7 @@ class Main extends PureComponent {
       filteredFilms,
       filmsGenres,
       mainFilm,
+      history
     } = this.props;
 
     const {amountFilmsForRender} = this.state;
@@ -81,10 +82,10 @@ class Main extends PureComponent {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button
-                    className="btn btn--play movie-card__button"
-                    type="button"
-                  >
+                  <button className="btn btn--play movie-card__button" type="button"
+                    onClick={() => {
+                      history.push(`/player/${mainFilm.id}`);
+                    }}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"/>
                     </svg>
@@ -129,7 +130,8 @@ class Main extends PureComponent {
 Main.propTypes = {
   mainFilm: filmPropTypes,
   filteredFilms: filmsListPropTypes,
-  filmsGenres: PropTypes.arrayOf(PropTypes.string)
+  filmsGenres: PropTypes.arrayOf(PropTypes.string),
+  history: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

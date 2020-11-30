@@ -50,3 +50,5 @@ export const FavoriteStatus = {
   FALSE: 0,
   TRUE: 1,
 };
+
+export const REVIEW_FORM_RATINGS = [`1`, `2`, `3`, `4`, `5`];

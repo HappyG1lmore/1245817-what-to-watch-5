@@ -1,8 +1,8 @@
-import React from "react";
+import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {withAddReviewState} from "../../hocs/with-add-review-state";
 import {connect} from "react-redux";
-import {ReviewsLength} from "../../constants";
+import {ReviewsLength, REVIEW_FORM_RATINGS} from "../../constants";
 
 const ReviewForm = (props) => {
   const {
@@ -22,23 +22,26 @@ const ReviewForm = (props) => {
       <form className="add-review__form" onSubmit={onHandleSubmit}>
         <div className="rating">
           <div className="rating__stars">
-            <input className="rating__input" id="star-1" type="radio" name="rating" value="1" disabled={isUploading}/>
-            <label className="rating__label" htmlFor="star-1">Rating 1</label>
-
-            <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onChange={onFieldChange} disabled={isUploading}/>
-            <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-            <input className="rating__input" id="star-3" type="radio" name="rating" value="3"
-              onChange={onFieldChange} disabled={isUploading}/>
-            <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-            <input className="rating__input" id="star-4" type="radio" name="rating" value="4"
-              onChange={onFieldChange} disabled={isUploading}/>
-            <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-            <input className="rating__input" id="star-5" type="radio" name="rating" value="5"
-              onChange={onFieldChange} disabled={isUploading}/>
-            <label className="rating__label" htmlFor="star-5">Rating 5</label>
+            {REVIEW_FORM_RATINGS.map((ratingScore) => (
+              <Fragment key={ratingScore}>
+                <input
+                  checked={ratingScore === rating}
+                  className="rating__input"
+                  disabled={isUploading}
+                  id={`star-${ratingScore}`}
+                  type="radio"
+                  name="rating"
+                  value={ratingScore}
+                  onChange={onFieldChange}
+                />
+                <label
+                  className="rating__label"
+                  htmlFor={`star-${ratingScore}`}
+                >
+                  Rating {ratingScore}
+                </label>
+              </Fragment>
+            ))}
           </div>
         </div>
 

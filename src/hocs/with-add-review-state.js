@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {uploadReview} from "../store/api-action";
+import {REVIEW_FORM_RATINGS} from "../constants";
 
 export const withAddReviewState = (Component) => {
   class AddReview extends PureComponent {
@@ -9,7 +10,7 @@ export const withAddReviewState = (Component) => {
       super(props);
 
       this.state = {
-        rating: ``,
+        rating: REVIEW_FORM_RATINGS[2],
         reviewText: ``,
       };
 

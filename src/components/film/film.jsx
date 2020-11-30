@@ -50,7 +50,7 @@ class Film extends PureComponent {
   render() {
     const {
       film,
-      history,
+      C,
       match: {params, url},
       authorizationStatus
     } = this.props;
@@ -131,7 +131,7 @@ class Film extends PureComponent {
           </div>
         </React.Fragment>
         :
-        <h2>Film with url: app{url} not found</h2>
+        <h2>film is loading</h2>
     );
   }
 }

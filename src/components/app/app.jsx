@@ -37,8 +37,8 @@ class App extends PureComponent {
     return (
       <BrowserRouter history={browserHistory}>
         <Switch>
-          <Route exact path="/" render={() => (
-            <Main/>
+          <Route exact path="/" render={(routerProps) => (
+            <Main {...routerProps}/>
           )}/>
           <Route exact path="/login"> <SignIn /> </Route>
           <PrivateRoute

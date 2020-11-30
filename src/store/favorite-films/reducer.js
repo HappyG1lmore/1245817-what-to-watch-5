@@ -22,9 +22,9 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isUploadingFavorite: false,
       });
-    case ActionType.RESET_FAVORITE_FILM:
+    case ActionType.RESET_FAVORITE_FILMS:
       return extend(state, {
-        isUploadingFavorite: true,
+        isFavoriteFilmsFetching: true,
         favoriteFilms: []
       });
   }

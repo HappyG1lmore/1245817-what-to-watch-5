@@ -4,7 +4,7 @@ export const ActionType = {
   FETCH_FAVORITE_FILMS_SUCCESS: `FETCH_FAVORITE_FILMS_SUCCESS`,
   UPLOAD_FAVORITE_FILM: `UPLOAD_FAVORITE_FILM`,
   UPLOAD_FAVORITE_FILM_COMPLETE: `UPLOAD_FAVORITE_FILM_COMPLETE`,
-  RESET_FAVORITE_FILM: `UPLOAD_FAVORITE_FILM`
+  RESET_FAVORITE_FILMS: `RESET_FAVORITE_FILMS`
 };
 
 export const onFavoriteFilmsFetchSuccess = (films) => {
@@ -29,6 +29,6 @@ export const toggleFavoriteComplete = () => {
 
 export const resetFavoriteFilm = () => {
   return {
-    type: ActionType.RESET_FAVORITE_FILM,
+    type: ActionType.RESET_FAVORITE_FILMS,
   };
 };
