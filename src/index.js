@@ -11,11 +11,11 @@ import {AuthorizationStatus} from "./constants";
 import {fetchFilms, checkAuth, getPromoFilm} from "./store/api-action";
 import {redirect} from "./store/middlewares/redirect";
 import {composeWithDevTools} from "redux-devtools-extension";
-import {onAnyOtherError} from "./store/ app/actions";
+import {setApiRequestError} from "./store/ app/actions";
 
 const api = createAPI(
     () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
-    () => store.dispatch(onAnyOtherError()));
+    () => store.dispatch(setApiRequestError()));
 
 export const store = createStore(
     reducer,

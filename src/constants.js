@@ -7,7 +7,8 @@ export const FilmPreviewSize = {
 };
 
 export const HttpCode = {
-  UNAUTHORIZED: 401
+  UNAUTHORIZED: 401,
+  LOGIN_BAD_REQUEST: 400
 };
 
 export const AuthorizationStatus = {

@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {withLoginState} from "../../hocs/with-login-state";
-import {Link} from "react-router-dom";
 import {login} from "../../store/api-action";
 import {connect} from "react-redux";
 import Header from "../header/header";
+import Footer from "../footer/footer";
 import {Redirect} from "react-router-dom";
 
 const SignIn = (props) => {
@@ -13,7 +13,8 @@ const SignIn = (props) => {
     loginAction,
     userPassword,
     userEmail,
-    authorizationStatus
+    authorizationStatus,
+    isLoginBadRequest
   } = props;
 
   const handleSubmit = (evt) => {
@@ -36,6 +37,13 @@ const SignIn = (props) => {
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+          { isLoginBadRequest &&
+            <div className="sign-in__message">
+              <p> We can’t recognize this email <br/>
+              and password combination. Please try again.
+              </p>
+            </div>
+          }
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="userEmail"
@@ -54,19 +62,7 @@ const SignIn = (props) => {
         </form>
       </div>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <Link to={`/`} className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </Link>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
@@ -77,11 +73,13 @@ SignIn.propTypes = {
   authorizationStatus: PropTypes.string,
   userPassword: PropTypes.string,
   userEmail: PropTypes.string,
+  isLoginBadRequest: PropTypes.bool
 };
 
 const mapStateToProps = (state) => {
   return {
-    authorizationStatus: state.users.authorizationStatus
+    authorizationStatus: state.users.authorizationStatus,
+    isLoginBadRequest: state.users.isLoginBadRequest,
   };
 };
 

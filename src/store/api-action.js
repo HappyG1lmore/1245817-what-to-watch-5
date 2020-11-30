@@ -1,6 +1,5 @@
-import {AuthorizationStatus} from "../constants";
-import {requireAuthorization, getUserAvatar} from "./users/actions";
-import {APIRoute} from "../constants";
+import {AuthorizationStatus, APIRoute, HttpCode} from "../constants";
+import {requireAuthorization, getUserAvatar, onLoginBadRequest} from "./users/actions";
 import {onFilmsFetchSuccess} from "./films/actions";
 import {onFilmInfoFetchSuccess, onFilmPromoFetchSuccess} from "./film/actions";
 import {onCommentsFetchSuccess} from "./reviews/actions";
@@ -95,7 +94,9 @@ export const login = (email, password) => {
     return api.post(APIRoute.LOGIN, {email, password})
       .then(() => {
         dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-      });
+      })
+      .catch((response) => response.status === HttpCode.LOGIN_BAD_REQUEST
+    && dispatch(onLoginBadRequest()));
   };
 };
 

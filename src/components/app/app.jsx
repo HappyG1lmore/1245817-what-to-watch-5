@@ -8,7 +8,7 @@ import MyList from "./../my-list/my-list";
 import Film from "./../film/film";
 import PrivateRoute from "../private-route/private-route";
 import AddReview from "./../add-review/add-review";
-import ErrorAll from "./../error-all/error-all";
+import ErrorScreen from "../error-screen/error-screen";
 import Player from "./../player/player";
 import browserHistory from "../../browser-history";
 import {getPromoFilm} from "../../store/api-action";
@@ -24,13 +24,16 @@ class App extends PureComponent {
   render() {
 
     const {isApiRequestError} = this.props;
+
+    if (isApiRequestError) {
+      return <ErrorScreen />;
+    }
+
     return (
       <BrowserRouter history={browserHistory}>
         <Switch>
           <Route exact path="/" render={() => (
-            isApiRequestError
-              ? <ErrorAll />
-              : <Main/>
+            <Main/>
           )}/>
           <Route exact path="/login"> <SignIn /> </Route>
           <PrivateRoute

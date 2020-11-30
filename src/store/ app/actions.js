@@ -1,18 +1,12 @@
 
 export const ActionType = {
-  RECEIVED_AN_ERROR: `RECEIVED_AN_ERROR`,
+  SET_API_REQUEST_ERROR: `SET_API_REQUEST_ERROR`,
   CLEAR_ERROR: `CLEAR_ERROR`
 };
 
-export const onAnyOtherError = () => {
+export const setApiRequestError = () => {
   return {
-    type: ActionType.RECEIVED_AN_ERROR,
-  };
-};
-
-export const clearError = () => {
-  return {
-    type: ActionType.CLEAR_ERROR,
+    type: ActionType.SET_API_REQUEST_ERROR,
   };
 };
 
