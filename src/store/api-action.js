@@ -96,8 +96,12 @@ export const login = (email, password) => {
         dispatch(requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(getUserAvatar(res.data.avatar_url));
       })
-      .catch((response) => response.status === HttpCode.BAD_REQUEST
-    && dispatch(onLoginBadRequest()));
+      .catch((err) => {
+        const {response} = err;
+        if (response && response.status === HttpCode.BAD_REQUEST) {
+          dispatch(onLoginBadRequest());
+        }
+      });
   };
 };
 
