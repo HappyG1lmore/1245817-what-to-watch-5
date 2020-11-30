@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         userAvatar: action.payload,
       });
-    case ActionType.LOGIN_BAD_REQUEST:
+    case ActionType.BAD_REQUEST:
       return extend(state, {
         isLoginBadRequest: true,
       });

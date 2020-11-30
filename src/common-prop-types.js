@@ -21,9 +21,3 @@ export const filmPropTypes = PropTypes.shape({
 
 export const filmsListPropTypes = PropTypes.arrayOf(filmPropTypes);
 
-export const routerPropTypes = {
-  match: PropTypes.object,
-  history: PropTypes.object,
-  location: PropTypes.object
-};
-

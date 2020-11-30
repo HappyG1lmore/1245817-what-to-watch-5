@@ -16,16 +16,16 @@ export const createAPI = (onUnauthorized, onAnyOtherError) => {
   const onFail = (err) =>{
     const {response} = err;
 
-    if (!status || (response.status !== HttpCode.UNAUTHORIZED)) {
-      onAnyOtherError();
-      throw err;
-    }
-
     if (response.status === HttpCode.UNAUTHORIZED) {
       onUnauthorized();
       throw err;
     }
 
+    if (response && response.status === HttpCode.BAD_REQUEST) {
+      throw err;
+    }
+
+    onAnyOtherError();
     throw err;
   };
 

@@ -92,10 +92,11 @@ export const checkAuth = () => {
 export const login = (email, password) => {
   return (dispatch, getState, api) => {
     return api.post(APIRoute.LOGIN, {email, password})
-      .then(() => {
+      .then((res) => {
         dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(getUserAvatar(res.data.avatar_url));
       })
-      .catch((response) => response.status === HttpCode.LOGIN_BAD_REQUEST
+      .catch((response) => response.status === HttpCode.BAD_REQUEST
     && dispatch(onLoginBadRequest()));
   };
 };

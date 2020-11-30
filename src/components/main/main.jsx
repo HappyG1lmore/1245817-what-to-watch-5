@@ -128,15 +128,12 @@ class Main extends PureComponent {
 
 Main.propTypes = {
   mainFilm: filmPropTypes,
-  filmsList: filmsListPropTypes,
   filteredFilms: filmsListPropTypes,
-  isFilmsFetching: PropTypes.bool,
   filmsGenres: PropTypes.arrayOf(PropTypes.string)
 };
 
 const mapStateToProps = (state) => {
   return {
-    filmsList: state.films.filmsList,
     filteredFilms: filteredFilmsSelector(state.films),
     filmsGenres: genresFilterSelector(state.films),
     mainFilm: state.film.promoFilm

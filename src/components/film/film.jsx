@@ -146,7 +146,6 @@ Film.propTypes = {
   authorizationStatus: PropTypes.string,
   clearFilm: PropTypes.func,
   getCommentsList: PropTypes.func,
-  comments: PropTypes.array,
   clearReviews: PropTypes.func,
 };
 

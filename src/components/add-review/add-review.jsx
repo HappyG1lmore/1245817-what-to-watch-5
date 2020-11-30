@@ -1,9 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {routerPropTypes} from "../../common-prop-types";
 import ReviewForm from "../../components/review-form/review-form";
 import Header from "../header/header";
 import {connect} from "react-redux";
+import {filmsListPropTypes} from "../../common-prop-types"
+import PropTypes from "prop-types";
 
 const AddReview = (props) => {
   const {filmsList} = props;
@@ -50,7 +51,11 @@ const AddReview = (props) => {
   );
 };
 
-AddReview.propTypes = routerPropTypes;
+AddReview.propTypes = {
+  filmsList: filmsListPropTypes,
+  params: PropTypes.object,
+  match: PropTypes.object,
+};
 
 const mapStateToProps = (state) => {
   return {

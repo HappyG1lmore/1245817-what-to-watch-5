@@ -12,8 +12,13 @@ import ErrorScreen from "../error-screen/error-screen";
 import Player from "./../player/player";
 import browserHistory from "../../browser-history";
 import {getPromoFilm} from "../../store/api-action";
+import {checkAuth} from "../../store/api-action";
 
 class App extends PureComponent {
+  componentDidMount() {
+    this.props.checkAuthAction();
+  }
+
   componentDidUpdate(prevProps) {
     const {getPromoFilmAction} = this.props;
     if (prevProps.authorizationStatus !== this.props.authorizationStatus) {
@@ -55,15 +60,10 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  mainFilm: PropTypes.shape({
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.string
-  }),
-  fetchFilmsAction: PropTypes.func,
   authorizationStatus: PropTypes.string,
   getPromoFilmAction: PropTypes.func,
-  isApiRequestError: PropTypes.bool
+  isApiRequestError: PropTypes.bool,
+  checkAuthAction: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -76,6 +76,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getPromoFilmAction: () => dispatch(getPromoFilm()),
+    checkAuthAction: () => dispatch(checkAuth())
   };
 };
 
