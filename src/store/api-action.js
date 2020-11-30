@@ -1,10 +1,19 @@
 import {AuthorizationStatus} from "../constants";
 import {requireAuthorization, getUserAvatar} from "./users/actions";
 import {APIRoute} from "../constants";
-import {onFilmsFetchSuccess, onFavoriteFilmsFetchSuccess} from "./films/actions";
+import {onFilmsFetchSuccess} from "./films/actions";
 import {onFilmInfoFetchSuccess, onFilmPromoFetchSuccess} from "./film/actions";
 import {onCommentsFetchSuccess} from "./reviews/actions";
-import {uploadReviewStart, uploadReviewComplete, redirectToRoute} from "./userReview/actions";
+import {
+  uploadReviewStart,
+  uploadReviewComplete,
+  redirectToRoute
+} from "./userReview/actions";
+import {
+  onFavoriteFilmsFetchSuccess,
+  toggleFavoriteStart,
+  toggleFavoriteComplete
+} from "./favorite-films/actions";
 
 export const fetchFilms = () => {
   return (dispatch, getState, api) => {
@@ -22,6 +31,26 @@ export const fetchFavoriteFilms = () => {
         dispatch(onFavoriteFilmsFetchSuccess(res.data));
       });
   };
+};
+
+export const toggleFavorite = (id, status) => (dispatch, getState, api) => {
+  dispatch(toggleFavoriteStart());
+  return api.post(`${APIRoute.FAVORITE}/${id}/${status}`)
+    .then(({data}) => {
+      const store = getState();
+      const film = store.film.film;
+      const promoFilm = store.film.promoFilm;
+      dispatch(toggleFavoriteComplete());
+
+      if (film) {
+        dispatch(onFilmInfoFetchSuccess(data));
+      }
+
+      if (promoFilm.id === id) {
+        dispatch(onFilmPromoFetchSuccess(data));
+      }
+    })
+      .catch(() => dispatch(toggleFavoriteComplete()));
 };
 
 export const getFilmInfo = (id) => {

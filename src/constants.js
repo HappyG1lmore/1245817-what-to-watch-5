@@ -45,3 +45,7 @@ export const ReviewsLength = {
 export const MAX_AMOUNT_FILMS_PER_STEP = 8;
 export const MAX_AMOUNT_SIMILAR_FILMS = 4;
 
+export const FavoriteStatus = {
+  FALSE: 0,
+  TRUE: 1,
+};

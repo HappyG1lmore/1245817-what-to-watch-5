@@ -51,9 +51,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispath) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    changeFilterGenreAction: (genre) => dispath(changeFilterGenre(genre)),
+    changeFilterGenreAction: (genre) => dispatch(changeFilterGenre(genre)),
   };
 };
 

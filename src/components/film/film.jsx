@@ -8,6 +8,7 @@ import LikeThis from "../../components/like-this/like-this";
 import {getComments, getFilmInfo} from "../../store/api-action";
 import {clearFilmInfo} from "../../store/film/actions";
 import {clearComments} from "../../store/reviews/actions";
+import FavoriteButton from "../favorite-button/favorite-button";
 
 class Film extends PureComponent {
   constructor(props) {
@@ -87,12 +88,10 @@ class Film extends PureComponent {
                       </svg>
                       <span>Play</span>
                     </button>
-                    <button className="btn btn--list movie-card__button" type="button">
-                      <svg viewBox="0 0 19 20" width="19" height="20">
-                        <use xlinkHref="#add"/>
-                      </svg>
-                      <span>My list</span>
-                    </button>
+                    <FavoriteButton
+                      isFavorite={film.isFavorite}
+                      id={film.id}
+                    />
                     {
                       authorizationStatus === `AUTH`
                       &&
@@ -121,7 +120,6 @@ class Film extends PureComponent {
           </section>
 
           <div className="page-content">
-
 
             <LikeThis
               genre={film.genre}
@@ -170,12 +168,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispath) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getFilmInformation: (id) => dispath(getFilmInfo(id)),
-    getCommentsList: (id) => dispath(getComments(id)),
-    clearFilm: () => dispath(clearFilmInfo()),
-    clearReviews: () => dispath(clearComments()),
+    getFilmInformation: (id) => dispatch(getFilmInfo(id)),
+    getCommentsList: (id) => dispatch(getComments(id)),
+    clearFilm: () => dispatch(clearFilmInfo()),
+    clearReviews: () => dispatch(clearComments()),
   };
 };
 

@@ -9,6 +9,7 @@ import MoreFilmsButton from "../more-films-button/more-films-button";
 import {filteredFilmsSelector, genresFilterSelector} from "../../store/selectors";
 import {MAX_AMOUNT_FILMS_PER_STEP} from "../../constants";
 import {filmPropTypes} from "../../common-prop-types";
+import FavoriteButton from "../favorite-button/favorite-button";
 
 class Main extends PureComponent {
   constructor(props) {
@@ -88,15 +89,10 @@ class Main extends PureComponent {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button
-                    className="btn btn--list movie-card__button"
-                    type="button"
-                  >
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"/>
-                    </svg>
-                    <span>My list</span>
-                  </button>
+                  <FavoriteButton
+                    isFavorite={mainFilm.isFavorite}
+                    id={mainFilm.id}
+                  />
                 </div>
               </div>
             </div>

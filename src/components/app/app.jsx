@@ -1,5 +1,6 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import Main from "./../main/main";
 import SignIn from "./../sign-in/sign-in";
@@ -7,33 +8,48 @@ import MyList from "./../my-list/my-list";
 import Film from "./../film/film";
 import PrivateRoute from "../private-route/private-route";
 import AddReview from "./../add-review/add-review";
+import ErrorAll from "./../error-all/error-all";
 import Player from "./../player/player";
 import browserHistory from "../../browser-history";
+import {getPromoFilm} from "../../store/api-action";
 
-const App = () => {
-  return (
-    <BrowserRouter history={browserHistory}>
-      <Switch>
-        <Route exact path="/" render={() => (
-          <Main />
-        )}/>
-        <Route exact path="/login"> <SignIn/> </Route>
-        <PrivateRoute
-          exact
-          path={`/mylist`}
-          render={() => <MyList />}
-        />
-        <Route exact path="/films/:id?" component={Film}/>
-        <Route exact path="/player/:id?" component={Player}/>
-        <PrivateRoute
-          exact
-          path={`/films/:id/review`}
-          render={(routerProps) => <AddReview {...routerProps} />}
-        />
-      </Switch>
-    </BrowserRouter>
-  );
-};
+class App extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const {getPromoFilmAction} = this.props;
+    if (prevProps.authorizationStatus !== this.props.authorizationStatus) {
+      getPromoFilmAction();
+    }
+  }
+
+  render() {
+
+    const {isApiRequestError} = this.props;
+    return (
+      <BrowserRouter history={browserHistory}>
+        <Switch>
+          <Route exact path="/" render={() => (
+            isApiRequestError
+              ? <ErrorAll />
+              : <Main/>
+          )}/>
+          <Route exact path="/login"> <SignIn /> </Route>
+          <PrivateRoute
+            exact
+            path={`/mylist`}
+            render={() => <MyList/>}
+          />
+          <Route exact path="/films/:id?" component={Film}/>
+          <Route exact path="/player/:id?" component={Player}/>
+          <PrivateRoute
+            exact
+            path={`/films/:id/review`}
+            render={(routerProps) => <AddReview {...routerProps} />}
+          />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+}
 
 App.propTypes = {
   mainFilm: PropTypes.shape({
@@ -42,6 +58,23 @@ App.propTypes = {
     year: PropTypes.string
   }),
   fetchFilmsAction: PropTypes.func,
+  authorizationStatus: PropTypes.string,
+  getPromoFilmAction: PropTypes.func,
+  isApiRequestError: PropTypes.bool
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    authorizationStatus: state.users.authorizationStatus,
+    isApiRequestError: state.app.isApiRequestError
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getPromoFilmAction: () => dispatch(getPromoFilm()),
+  };
+};
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

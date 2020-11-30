@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDom from "react-dom";
-import {createStore, applyMiddleware, compose} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import App from "./components/app/app";
@@ -11,10 +11,11 @@ import {AuthorizationStatus} from "./constants";
 import {fetchFilms, checkAuth, getPromoFilm} from "./store/api-action";
 import {redirect} from "./store/middlewares/redirect";
 import {composeWithDevTools} from "redux-devtools-extension";
+import {onAnyOtherError} from "./store/ app/actions";
 
 const api = createAPI(
-    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
-);
+    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
+    () => store.dispatch(onAnyOtherError()));
 
 export const store = createStore(
     reducer,
@@ -23,7 +24,6 @@ export const store = createStore(
         applyMiddleware(redirect)
     )
 );
-
 
 Promise.all([
   store.dispatch(fetchFilms()),

@@ -6,7 +6,6 @@ export const ActionType = {
   FILM_INFO: `FILM_INFO`,
   GET_COMMENTS: `GET_COMMENTS`,
   CLEAR_FILM_INFO: `CLEAR_FILM_INFO`,
-  FETCH_FAVORITE_FILMS_SUCCESS: `FETCH_FAVORITE_FILMS_SUCCESS`
 };
 
 export const changeFilterGenre = (genre) => {
@@ -23,11 +22,5 @@ export const onFilmsFetchSuccess = (films) => {
   };
 };
 
-export const onFavoriteFilmsFetchSuccess = (films) => {
-  return {
-    type: ActionType.FETCH_FAVORITE_FILMS_SUCCESS,
-    payload: adaptFilmsToClient(films)
-  };
-};
 
 

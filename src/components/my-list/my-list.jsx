@@ -1,70 +1,81 @@
-import React from "react";
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {filmsListPropTypes} from "../../common-prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
 import Header from "../header/header";
-import PropTypes from "prop-types";
+import {fetchFavoriteFilms} from "../../store/api-action";
+import {resetFavoriteFilm} from "../../store/favorite-films/actions";
+import {filmsListPropTypes} from "../../common-prop-types";
 
-const MyList = (props) => {
-  const {filmsList} = props;
+class MyList extends PureComponent {
+  componentDidMount() {
+    const {fetchFavoriteFilmsAction} = this.props;
+    fetchFavoriteFilmsAction();
+  }
 
-  return (
-    <div className="user-page">
-      <Header className={`user-page__head`}>
-        <h1 className="page-title user-page__title">My list</h1>
-      </Header>
+  componentWillUnmount() {
+    const {resetFavoriteFilmAction} = this.props;
+    resetFavoriteFilmAction();
+  }
 
-      <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
+  render() {
+    const {favoriteFilms} = this.props;
 
-        <div className="catalog__movies-list">
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                Grindelwald</a>
-            </h3>
-          </article>
-          {filmsList.map((film) => (
-            <SmallMovieCard
-              key={film.id}
-              film={film}
-            />
-          ))}
-        </div>
-      </section>
+    return (
+      <div className="user-page">
+        <Header className={`user-page__head`}>
+          <h1 className="page-title user-page__title">My list</h1>
+        </Header>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
-    </div>
-  );
-};
+          <div className="catalog__movies-list">
+            {favoriteFilms.map((film) => (
+              <SmallMovieCard
+                key={film.id}
+                film={film}
+              />
+            ))}
+          </div>
+        </section>
+
+        <footer className="page-footer">
+          <div className="logo">
+            <a href="main.html" className="logo__link logo__link--light">
+              <span className="logo__letter logo__letter--1">W</span>
+              <span className="logo__letter logo__letter--2">T</span>
+              <span className="logo__letter logo__letter--3">W</span>
+            </a>
+          </div>
+
+          <div className="copyright">
+            <p>© 2019 What to watch Ltd.</p>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+}
 
 MyList.propTypes = {
-  filmsList: filmsListPropTypes,
-  onCardMouseEnter: PropTypes.func,
-  onCardMouseLeave: PropTypes.func,
+  favoriteFilms: filmsListPropTypes,
+  fetchFavoriteFilmsAction: PropTypes.func,
+  resetFavoriteFilmAction: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
   return {
-    filmsList: state.films.filmsList,
+    favoriteFilms: state.favoriteFilms.favoriteFilms,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchFavoriteFilmsAction: () => dispatch(fetchFavoriteFilms()),
+    resetFavoriteFilmAction: () => dispatch(resetFavoriteFilm())
   };
 };
 
 export {MyList};
-export default connect(mapStateToProps)(MyList);
+export default connect(mapStateToProps, mapDispatchToProps)(MyList);

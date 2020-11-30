@@ -2,7 +2,7 @@ import axios from "axios";
 import {API_TIMEOUT} from "../constants";
 import {HttpCode} from "../constants";
 
-export const createAPI = (onUnauthorized) => {
+export const createAPI = (onUnauthorized, onAnyOtherError) => {
   const api = axios.create({
     baseURL: `https://5.react.pages.academy/wtw`,
     timeout: API_TIMEOUT,
@@ -20,6 +20,12 @@ export const createAPI = (onUnauthorized) => {
       onUnauthorized();
       throw err;
     }
+
+    if (response.status !== HttpCode.UNAUTHORIZED) {
+      onAnyOtherError();
+      throw err;
+    }
+
     throw err;
   };
 
