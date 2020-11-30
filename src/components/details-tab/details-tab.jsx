@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
-import {MINUTES_IN_HOUR} from "../../constants"
+import {MINUTES_IN_HOUR} from "../../constants";
 
 export const DetailsTab = (props) => {
   const {film} = props;

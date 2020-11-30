@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import ReviewForm from "../../components/review-form/review-form";
 import Header from "../header/header";
 import {connect} from "react-redux";
-import {filmsListPropTypes} from "../../common-prop-types"
+import {filmsListPropTypes} from "../../common-prop-types";
 import PropTypes from "prop-types";
 
 const AddReview = (props) => {

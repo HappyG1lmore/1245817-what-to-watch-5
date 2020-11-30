@@ -50,7 +50,7 @@ class Film extends PureComponent {
   render() {
     const {
       film,
-      C,
+      history,
       match: {params, url},
       authorizationStatus
     } = this.props;
