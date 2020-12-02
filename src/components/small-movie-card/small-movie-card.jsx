@@ -18,7 +18,7 @@ const SmallMovieCard = (props) => {
       <Link to={`/films/${film.id}`}>
         <VideoPlayer
           poster={film.frame}
-          src={film.video}
+          src={film.previewVideoLink}
           playPreview={playPreview}
           width={FilmPreviewSize.WIDTH}
           height={FilmPreviewSize.HEIGHT}

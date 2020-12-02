@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmallMovieCard renders correctly 1`] = `
+<article
+  className="small-movie-card catalog__movies-card"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <Link
+    to="/films/4"
+  >
+    <VideoPlayer
+      height="175"
+      muted={true}
+      playPreview={false}
+      poster="https://assets.htmlacademy.ru/intensives/javascript-3/film/preview/matrix.jpg"
+      src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+      width="280"
+    />
+  </Link>
+  <h3
+    className="small-movie-card__title"
+  >
+    <Link
+      className="small-movie-card__link"
+      to="/films/4"
+    >
+      Matrix
+    </Link>
+  </h3>
+</article>
+`;

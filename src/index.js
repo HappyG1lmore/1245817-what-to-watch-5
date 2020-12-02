@@ -12,7 +12,7 @@ import {AuthorizationStatus} from "./constants";
 import {fetchFilms, getPromoFilm} from "./store/api-action";
 import {redirect} from "./store/middlewares/redirect";
 import {composeWithDevTools} from "redux-devtools-extension";
-import {setApiRequestError} from "./store/ app/actions";
+import {setApiRequestError} from "./store/app/actions";
 
 const api = createAPI(
     () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),

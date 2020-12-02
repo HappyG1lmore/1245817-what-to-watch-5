@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders correctly When all data loaded without errors 1`] = `
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <Switch>
+    <Route
+      exact={true}
+      path="/"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/login"
+    >
+       
+      <Memo(Connect(Login)) />
+       
+    </Route>
+    <Memo(Connect(PrivateRoute))
+      exact={true}
+      path="/mylist"
+      render={[Function]}
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(Film)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/films/:id?"
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(WithFilmPlayer)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/player/:id?"
+    />
+    <Memo(Connect(PrivateRoute))
+      exact={true}
+      path="/films/:id/review"
+      render={[Function]}
+    />
+  </Switch>
+</Router>
+`;
+
+exports[`App renders correctly When error occurred while data load 1`] = `<ErrorScreen />`;
+
+exports[`App renders correctly When some data is loading 1`] = `
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <Switch>
+    <Route
+      exact={true}
+      path="/"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/login"
+    >
+       
+      <Memo(Connect(Login)) />
+       
+    </Route>
+    <Memo(Connect(PrivateRoute))
+      exact={true}
+      path="/mylist"
+      render={[Function]}
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(Film)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/films/:id?"
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(WithFilmPlayer)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/player/:id?"
+    />
+    <Memo(Connect(PrivateRoute))
+      exact={true}
+      path="/films/:id/review"
+      render={[Function]}
+    />
+  </Switch>
+</Router>
+`;

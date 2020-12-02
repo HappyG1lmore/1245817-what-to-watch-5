@@ -5,7 +5,7 @@ import {reducer as film} from "./film/reducer";
 import {reducer as reviews} from "./reviews/reducer";
 import {reducer as userReview} from "./userReview/reducer";
 import {reducer as favoriteFilms} from "./favorite-films/reducer";
-import {reducer as app} from "./ app/reducer";
+import {reducer as app} from "./app/reducer";
 
 export default combineReducers({
   films,

@@ -13,7 +13,6 @@ const Header = (props) => {
     userAvatar,
   } = props;
 
-
   const renderUserBlock = () => (
     <div className="user-block">
       {(authorizationStatus === `AUTH`)

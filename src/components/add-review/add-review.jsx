@@ -53,7 +53,6 @@ const AddReview = (props) => {
 
 AddReview.propTypes = {
   filmsList: filmsListPropTypes,
-  params: PropTypes.object,
   match: PropTypes.object,
 };
 

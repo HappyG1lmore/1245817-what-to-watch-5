@@ -11,7 +11,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isApiRequestError: true,
       });
-
   }
   return state;
 };

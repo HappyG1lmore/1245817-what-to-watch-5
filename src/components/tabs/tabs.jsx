@@ -60,4 +60,5 @@ Tabs.propTypes = {
   film: PropTypes.object
 };
 
+export {Tabs};
 export default withActiveTabState(Tabs);

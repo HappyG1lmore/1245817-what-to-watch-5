@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenresList renders correctly 1`] = `
+<React.Fragment>
+  <li
+    className="catalog__genres-item
+              "
+  >
+    <div
+      className="catalog__genres-link"
+      onClick={[Function]}
+    >
+      Comedy
+    </div>
+  </li>
+  <li
+    className="catalog__genres-item
+              catalog__genres-item--active"
+  >
+    <div
+      className="catalog__genres-link"
+      onClick={[Function]}
+    >
+      Drama
+    </div>
+  </li>
+  <li
+    className="catalog__genres-item
+              "
+  >
+    <div
+      className="catalog__genres-link"
+      onClick={[Function]}
+    >
+      Thriller
+    </div>
+  </li>
+</React.Fragment>
+`;

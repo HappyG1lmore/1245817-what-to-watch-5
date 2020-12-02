@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignIn page renders correctly When form filled 1`] = `
+<div
+  className="user-page"
+>
+  <Memo(Connect(Header))
+    className="user-page__head"
+    withUserBlock={false}
+  >
+    <h1
+      className="page-title user-page__title"
+    >
+      Sign in
+    </h1>
+  </Memo(Connect(Header))>
+  <div
+    className="sign-in user-page__content"
+  >
+    <form
+      action="#"
+      className="sign-in__form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="sign-in__fields"
+      >
+        <div
+          className="sign-in__field"
+        >
+          <input
+            className="sign-in__input"
+            id="userEmail"
+            name="userEmail"
+            onChange={[Function]}
+            placeholder="Email address"
+            type="email"
+          />
+          <label
+            className="sign-in__label visually-hidden"
+            htmlFor="user-email"
+          >
+            Email address
+          </label>
+        </div>
+        <div
+          className="sign-in__field"
+        >
+          <input
+            className="sign-in__input"
+            id="userPassword"
+            name="userPassword"
+            onChange={[Function]}
+            placeholder="Password"
+            type="password"
+          />
+          <label
+            className="sign-in__label visually-hidden"
+            htmlFor="user-password"
+          >
+            Password
+          </label>
+        </div>
+      </div>
+      <div
+        className="sign-in__submit"
+      >
+        <button
+          className="sign-in__btn"
+          type="submit"
+        >
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+  <Footer />
+</div>
+`;
+
+exports[`SignIn page renders correctly When got bad request from server 1`] = `
+<div
+  className="user-page"
+>
+  <Memo(Connect(Header))
+    className="user-page__head"
+    withUserBlock={false}
+  >
+    <h1
+      className="page-title user-page__title"
+    >
+      Sign in
+    </h1>
+  </Memo(Connect(Header))>
+  <div
+    className="sign-in user-page__content"
+  >
+    <form
+      action="#"
+      className="sign-in__form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="sign-in__message"
+      >
+        <p>
+          Please enter a valid email address
+        </p>
+      </div>
+      <div
+        className="sign-in__fields"
+      >
+        <div
+          className="sign-in__field"
+        >
+          <input
+            className="sign-in__input"
+            id="userEmail"
+            name="userEmail"
+            onChange={[Function]}
+            placeholder="Email address"
+            type="email"
+          />
+          <label
+            className="sign-in__label visually-hidden"
+            htmlFor="user-email"
+          >
+            Email address
+          </label>
+        </div>
+        <div
+          className="sign-in__field"
+        >
+          <input
+            className="sign-in__input"
+            id="userPassword"
+            name="userPassword"
+            onChange={[Function]}
+            placeholder="Password"
+            type="password"
+          />
+          <label
+            className="sign-in__label visually-hidden"
+            htmlFor="user-password"
+          >
+            Password
+          </label>
+        </div>
+      </div>
+      <div
+        className="sign-in__submit"
+      >
+        <button
+          className="sign-in__btn"
+          type="submit"
+        >
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+  <Footer />
+</div>
+`;
+
+exports[`SignIn page renders correctly When user is authorized 1`] = `
+<Redirect
+  to="/"
+/>
+`;

@@ -139,7 +139,7 @@ class Film extends PureComponent {
 Film.propTypes = {
   history: PropTypes.object,
   match: PropTypes.object,
-  params: PropTypes.object,
+
   url: PropTypes.string,
   getFilmInformation: PropTypes.func,
   film: PropTypes.object,

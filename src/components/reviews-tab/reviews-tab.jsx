@@ -42,7 +42,6 @@ const ReviewsTab = (props) => {
   );
 };
 
-
 ReviewsTab.propTypes = {
   comments: PropTypes.arrayOf(
       PropTypes.shape({

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs renders correctly 1`] = `
+<React.Fragment>
+  <div
+    className="movie-card__desc"
+  >
+    <nav
+      className="movie-nav movie-card__nav"
+    >
+      <ul
+        className="movie-nav__list"
+      >
+        <li
+          className="movie-nav__item
+                   false
+               "
+        >
+          <a
+            className="movie-nav__link"
+            href="#"
+            onClick={[Function]}
+          >
+            Overview
+          </a>
+        </li>
+        <li
+          className="movie-nav__item
+                   movie-nav__item--active
+               "
+        >
+          <a
+            className="movie-nav__link"
+            href="#"
+            onClick={[Function]}
+          >
+            Details
+          </a>
+        </li>
+        <li
+          className="movie-nav__item
+                   false
+               "
+        >
+          <a
+            className="movie-nav__link"
+            href="#"
+            onClick={[Function]}
+          >
+            Reviews
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <DetailsTab
+      film={
+        Object {
+          "background": "https://assets.htmlacademy.ru/intensives/javascript-3/film/background/Pulp_Fiction.jpg",
+          "backgroundColor": "#795433",
+          "description": "The lives of two mob hitmen, a boxer, a gangster & his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+          "director": "Quentin Tarantino",
+          "frame": "https://assets.htmlacademy.ru/intensives/javascript-3/film/preview/pulp-fiction.jpg",
+          "genre": "Crime",
+          "id": 2,
+          "isFavorite": false,
+          "poster": "https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/Pulp_Fiction.jpg",
+          "previewVideoLink": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+          "rating": 1.5,
+          "ratingText": "Bad",
+          "ratings": "1635992",
+          "runtime": 153,
+          "starring": Array [
+            "John Travolta",
+            "Uma Thurman",
+            "Samuel L. Jackson",
+          ],
+          "title": "Pulp Fiction",
+          "video": "http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4",
+          "year": "1994",
+        }
+      }
+    />
+  </div>
+</React.Fragment>
+`;

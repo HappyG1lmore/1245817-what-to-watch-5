@@ -7,6 +7,7 @@ export const FilmPreviewSize = {
 };
 
 export const HttpCode = {
+  OK: 200,
   UNAUTHORIZED: 401,
   BAD_REQUEST: 400
 };
@@ -24,6 +25,7 @@ export const APIRoute = {
   LOGIN: `/login`,
   COMMENTS: `/comments`,
   FAVORITE: `/favorite`,
+  PROMO: `/promo`
 };
 
 export const TabType = {
